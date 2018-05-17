@@ -1,3 +1,5 @@
+### This is a standalone version of the Verilog to SCD converter of [TinyGarble](https://github.com/esonghori/TinyGarble)
+
 Simple Circuit Description (SCD)
 =======
 The initial idea of a Simple Circuit Description (SCD) was proposed in JustGarble 
