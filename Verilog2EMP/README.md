@@ -16,7 +16,7 @@ module _name_ (
 endmodule 
 ```
 
-## EMP Format
+## BMR Format
 ```
 <No_of_gates> <No_of_wires>
 <Bit_width_of_g_input> <Bit_width_of_e_input> <Bit_width_of_o> 
@@ -27,24 +27,20 @@ endfor
 ```
 
 ## Usage
-#### Compile:
 ```
-  $ ./configure
-  $ cd bin
-  $ make
-```
-#### Run:
-```
-./V2SCD_Main
+./V2BMR_Main 
 
-  -h [ --help ]              produce help message.
-  -i [ --netlist ] arg       Input netlist (verilog .v) file address.
-  -o [ --scd ] arg           Output simple circuit description (scd) file
-                             address.
+  -h [ --help ]         produce help message.
+  -i [ --netlist ] arg  Input netlist (verilog .v) file address.
+  -b [ --bmr ] arg      Output bmr circuit file address.
+  -n [ --np ] arg       Number of parties.
+  -p [ --perparty ] arg No of bits for every party (seperated by space)
+
 ```
+If arguments to both -n and -p are specified, the argument to -n is ignored.
 
 ## References
-- Xiao Wang and Alex J. Malozemoff and Jonathan Katz. "EMP-toolkit: Efficient MultiParty computation toolkit", 2016
+- Ben-Efraim, Aner, Yehuda Lindell, and Eran Omri. "Optimizing semi-honest secure multiparty computation for the internet." Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security. ACM, 2016. 
 - Ebrahim M. Songhori, Siam U. Hussain, Ahmad-Reza Sadeghi, Thomas Schneider
 and Farinaz Koushanfar, ["TinyGarble: Highly Compressed and Scalable Sequential
 Garbled Circuits."](http://esonghori.github.io/file/TinyGarble.pdf) <i>Security
