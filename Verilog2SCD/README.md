@@ -41,6 +41,25 @@ The format consists of seven lines:
 5- `outputs` index
 6- Flip-Flop's `D` (data wire index) 
 7- Flip-Flop's `I` (initial value index chosen from `g_init` and `e_init`).
+## Usage
+#### Compile:
+```
+  $ ./configure
+  $ cd bin
+  $ make
+```
+#### Run:
+```
+./V2SCD_Main
+
+  -h [ --help ]              produce help message.
+  -i [ --netlist ] arg       Input netlist (verilog .v) file address.
+  -b [ --brist_netlist ] arg Input netlist (.txt) file address (in the format
+                             given by www.cs.bris.ac.uk/Research/CryptographySe
+                             curity/MPC/).
+  -o [ --scd ] arg           Output simple circuit description (scd) file
+                             address.
+```
 
 ## References
 - Mihir Bellare, Viet Tung Hoang, Sriram Keelveedhi, and Phillip Rogaway.
