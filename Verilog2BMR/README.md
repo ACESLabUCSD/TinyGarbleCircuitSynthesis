@@ -30,8 +30,14 @@ for g = 0 to No_of_gates-1
 	<index of input0 wire> <index of input1 wire>  <index of output wire> <truth table>
 endfor
 ```
-
 ## Usage
+#### Compile:
+```
+  $ ./configure
+  $ cd bin
+  $ make
+```
+#### Run:
 ```
 ./V2BMR_Main 
 
