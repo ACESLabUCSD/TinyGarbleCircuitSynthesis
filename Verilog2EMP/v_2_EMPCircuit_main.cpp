@@ -22,8 +22,7 @@
 #include <iostream>
 #include <fstream>
 #include "parse_netlist.h"
-#include "circuit.h"
-#include "scheduling.h"
+#include "emp_circuit.h"
 #include "log.h"
 
 namespace po = boost::program_options;

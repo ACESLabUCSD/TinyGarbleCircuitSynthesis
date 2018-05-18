@@ -78,11 +78,8 @@ add_library (Util_Log OBJECT
 add_library (ParseNetlist OBJECT
   "parse_netlist.cpp")
 
-add_library (Scheduling OBJECT
-  "scheduling.cpp")
-
-add_library (Circuit OBJECT
-  "circuit.cpp")
+add_library (EMPCircuit OBJECT
+  "emp_circuit.cpp")
 
 add_library (V2EMPCircuit OBJECT
   "v_2_EMPCircuit.cpp")
@@ -91,8 +88,7 @@ add_executable(V2EMPCircuit_Main
   "v_2_EMPCircuit_main.cpp"
   "$<TARGET_OBJECTS:V2EMPCircuit>"
   "$<TARGET_OBJECTS:ParseNetlist>"
-  "$<TARGET_OBJECTS:Scheduling>"
-  "$<TARGET_OBJECTS:Circuit>"
+  "$<TARGET_OBJECTS:EMPCircuit>"
   "$<TARGET_OBJECTS:Util_Log>")
 
 if (Boost_FOUND)

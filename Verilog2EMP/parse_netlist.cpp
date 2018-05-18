@@ -22,7 +22,6 @@
 #include <boost/foreach.hpp>
 #include <fstream>
 #include <map>
-#include "scheduling.h"
 #include "common.h"
 #include "log.h"
 
@@ -413,6 +412,11 @@ int ParseNetlist(const string &filename,
   return SUCCESS;
 }
 
+bool isOutPort(string output){
+	if ((output.compare("o")==0) || (output.compare(0, 2,"o["))==0) return true;
+	else return false;
+}
+
 void AddWireArray(map<string, int64_t>& wire_name_table, const string& name,
                   uint64_t size, int64_t *wire_index) {
   if (size == 1) {
@@ -427,7 +431,6 @@ void AddWireArray(map<string, int64_t>& wire_name_table, const string& name,
     }
   }
 }
-
 
 int IdAssignment(const ReadCircuitString& read_circuit_string,
                  ReadCircuit* read_circuit) {
@@ -465,14 +468,19 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
   }
 
   for (uint i = 0; i < read_circuit->gate_size; i++) {
-    wire_name_table.insert(
-        pair<string, int64_t>(read_circuit_string.gate_list_string[i].output,
-                              wire_index++));  // gates' output
+	if(isOutPort(read_circuit_string.gate_list_string[i].output)==false){
+		wire_name_table.insert(
+			pair<string, int64_t>(read_circuit_string.gate_list_string[i].output,
+								  wire_index++));  // gates' output
+	}
   }
+  AddWireArray(wire_name_table, "o", read_circuit->output_size,
+               &wire_index);
+  
   wire_name_table.insert(pair<string, int64_t>("", ((uint64_t) - 1)));
   wire_name_table.insert(pair<string, int64_t>("1'b0", CONST_ZERO));
   wire_name_table.insert(pair<string, int64_t>("1'b1", CONST_ONE));
-
+  
   for (uint64_t i = 0; i < read_circuit_string.assignment_list_string.size();
       i++) {
     const auto assign_pair = read_circuit_string.assignment_list_string[i];
