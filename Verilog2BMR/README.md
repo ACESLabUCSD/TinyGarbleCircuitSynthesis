@@ -31,6 +31,13 @@ endfor
 ```
 
 ## Usage
+#### Compile:
+```
+  $ ./configure
+  $ cd bin
+  $ make
+```
+#### Run:
 ```
 ./V2BMR_Main 
 
