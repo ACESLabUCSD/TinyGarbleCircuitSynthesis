@@ -1,0 +1,87 @@
+library(demo) {
+	cell(IV) {
+		area: 0;
+		pin(A) { direction: input; }
+		pin(Z) { direction: output; function: "A'"; }
+	}
+	cell(XOR) {
+		area: 0;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A^B)"; }
+	}
+	cell(XNOR) {
+		area: 0;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A^B)'"; }
+	}	
+	cell(NOR) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A+B)'"; }
+	}	
+	cell(OR) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A+B)"; }
+	}	
+	cell(NAND) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A&B)'"; }
+	}	
+	cell(AND) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A&B)"; }
+	}
+	cell(NORN) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A'+B)'"; }
+	}	
+	cell(ORN) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A'+B)"; }
+	}	
+	cell(NANDN) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A'&B)'"; }
+	}	
+	cell(ANDN) {
+		area: 5;
+		pin(A) { direction: input; }
+		pin(B) { direction: input; }
+		pin(Z) { direction: output; function: "(A'&B)"; }
+	}
+	cell(FADDER) {
+		area: 5;
+		pin(IN0) { direction: input; }
+		pin(IN1) { direction: input; }
+		pin(CIN) { direction: input; }
+		pin(COUT) { direction: output; function: "((CIN*IN0)+(CIN*IN1)+(IN0*IN1))"; }
+		pin(SUM) { direction: output; function: "IN0^IN1^CIN"; }
+	}
+	cell(DFF) {
+	    area: 0;
+	    ff(IQ, IQN) { clocked_on: CLK;
+		          next_state: D;
+		               clear: RST; }
+	    pin(CLK) { direction: input;
+		         clock: true; }
+	    pin(D) { direction: input; }
+	    pin(Q) { direction: output;
+		      function: "IQ"; }
+	    pin(RST) { direction: input; }
+	  }
+}
