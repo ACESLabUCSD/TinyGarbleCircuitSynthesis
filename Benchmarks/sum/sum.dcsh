@@ -4,7 +4,7 @@ set link_library ../../SynthesisLibrary/lib/dff_full/dff_full.db
 set symbol_library [concat ../../SynthesisLibrary/lib/generic.sdb]
 set hdlin_while_loop_iterations 1024
 
-analyze -format verilog {../syn_lib/FA.v ../syn_lib/ADD.v ../syn_lib/MULT.v ../syn_lib/SUB.v ../syn_lib/COMP.v ../syn_lib/MUX.v}
+analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibrary/syn_lib/ADD.v ../../SynthesisLibrary/syn_lib/MULT.v ../../SynthesisLibrary/syn_lib/SUB.v ../../SynthesisLibrary/syn_lib/COMP.v ../../SynthesisLibrary/syn_lib/MUX.v}
 
 
 analyze -format verilog sum.v

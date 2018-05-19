@@ -8,5 +8,5 @@ then
 fi
 
 vlib work
-vlog ../../syn_lib/*.v ../*.v Test_Bench.v
+vlog ../../../SynthesisLibrary/syn_lib/*.v ../*.v Test_Bench.v
 vsim -gCC=$CC -do test.do Test_Bench

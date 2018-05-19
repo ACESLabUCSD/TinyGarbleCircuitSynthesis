@@ -4,7 +4,7 @@ set link_library ../../SynthesisLibrary/lib/dff_full/dff_full.db
 set symbol_library ../../SynthesisLibrary/lib/generic.sdb
 set hdlin_while_loop_iterations 16000
 
-analyze -format verilog {../syn_lib/FA.v ../syn_lib/ADD.v ../syn_lib/COUNT.v}
+analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibrary/syn_lib/ADD.v ../../SynthesisLibrary/syn_lib/COUNT.v}
 
 analyze -format verilog hamming.v
 
