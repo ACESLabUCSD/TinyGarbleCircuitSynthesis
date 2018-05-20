@@ -73,6 +73,7 @@ class ReadCircuit {
  public:
   vector<uint64_t> output_list;
   vector<ReadGate> gate_list;
+  vector<uint64_t> wire_mapping;
   vector<ReadGate> dff_list;
   vector<uint64_t> task_schedule;
 
@@ -95,6 +96,7 @@ class ReadCircuit {
   ReadCircuit()
       : output_list(0),
         gate_list(0),
+        wire_mapping(0),
         dff_list(0),
         task_schedule(0) {
     p_init_size = 0;

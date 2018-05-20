@@ -91,11 +91,11 @@ int ParseNetlist(const string &filename,
     tokenizer<char_separator<char> > tok(line, sep);
     BOOST_FOREACH(string str, tok){
     if(!str.compare(";")) {
-      if(gate_type == ANDGATE || gate_type == ANDNGATE ||
+      if(gate_type == ANDGATE || /*gate_type == ANDNGATE ||
           gate_type == NANDGATE|| gate_type == NANDNGATE ||
           gate_type == ORGATE || gate_type == ORNGATE ||
-          gate_type == NORGATE || gate_type == NORNGATE ||
-          gate_type == XORGATE || gate_type == XNORGATE) {
+          gate_type == NORGATE || gate_type == NORNGATE ||*/
+          gate_type == XORGATE /*|| gate_type == XNORGATE*/) { //EMP does not support other gates (yet!?)
 
         CHECK_EXPR_MSG(port.count("A") > 0 && port["A"]!="",
             "A is missing: " + line);
@@ -112,6 +112,70 @@ int ParseNetlist(const string &filename,
         read_circuit_string->gate_list_string.push_back(g);
         port.clear();
         gate_type = INVALGATE;
+      } else if(gate_type == NANDGATE) {
+        CHECK_EXPR_MSG(port.count("A") > 0 && port["A"]!="",
+            "A is missing: " + line);
+        CHECK_EXPR_MSG(port.count("B") > 0 && port["B"]!="",
+            "B is missing: " + line);
+        CHECK_EXPR_MSG(port.count("Z") > 0 && port["Z"]!="",
+            "Z is missing: " + line);
+		
+		//EMP does not support NAND gates (yet!?). Need to replace with AND and NOT gates
+        ReadGateString g1, g2;
+
+        uint64_t gate_id = read_circuit_string->gate_list_string.size();
+
+        g1.type = ANDGATE;
+        g1.input[0] = port["A"];
+        g1.input[1] = port["B"];
+        g1.output = "A_AND_B_" + std::to_string(gate_id);
+
+        g2.type = NOTGATE;
+        g2.input[0] = g1.output;
+        g2.input[1] = "";
+        g2.output = port["Z"];
+
+        read_circuit_string->gate_list_string.push_back(g1);
+        read_circuit_string->gate_list_string.push_back(g2);
+
+        port.clear();
+        gate_type = INVALGATE;
+		
+      }else if(gate_type == NORGATE) {
+        CHECK_EXPR_MSG(port.count("A") > 0 && port["A"]!="",
+            "A is missing: " + line);
+        CHECK_EXPR_MSG(port.count("B") > 0 && port["B"]!="",
+            "B is missing: " + line);
+        CHECK_EXPR_MSG(port.count("Z") > 0 && port["Z"]!="",
+            "Z is missing: " + line);
+		
+		//EMP does not support NOR gates (yet!?). Need to replace with AND and NOT gates
+        ReadGateString g1, g2, g3;
+
+        uint64_t gate_id = read_circuit_string->gate_list_string.size();
+		
+        g1.type = NOTGATE;
+        g1.input[0] =  port["A"];
+        g1.input[1] = "";
+        g1.output = "NOT_A_" + std::to_string(gate_id);
+		
+        g2.type = NOTGATE;
+        g2.input[0] =  port["B"];
+        g2.input[1] = "";
+        g2.output = "NOT_B_" + std::to_string(gate_id);
+
+        g3.type = ANDGATE;
+        g3.input[0] = g1.output;
+        g3.input[1] = g2.output;
+        g3.output = port["Z"];
+
+        read_circuit_string->gate_list_string.push_back(g1);
+        read_circuit_string->gate_list_string.push_back(g2);
+        read_circuit_string->gate_list_string.push_back(g3);
+
+        port.clear();
+        gate_type = INVALGATE;
+		
       } else if(gate_type == NOTGATE) {
         CHECK_EXPR_MSG(port.count("A") > 0 && port["A"]!="",
             "A is missing: " + line);
@@ -496,8 +560,12 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
   }
 
   read_circuit->gate_list.resize(read_circuit->gate_size);
+  read_circuit->wire_mapping.resize(read_circuit->gate_size);
   read_circuit->output_list.resize(read_circuit->output_size);
   read_circuit->dff_list.resize(read_circuit->dff_size);
+  
+  int64_t init_input_size = read_circuit->get_init_input_size();
+  int64_t init_input_dff_size = init_input_size + read_circuit->dff_size;
 
   for (uint64_t i = 0; i < read_circuit->gate_size; i++) {
     read_circuit->gate_list[i].type = read_circuit_string.gate_list_string[i]
@@ -521,6 +589,7 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
         .gate_list_string[i].input[1]];
     read_circuit->gate_list[i].output = wire_name_table[read_circuit_string
         .gate_list_string[i].output];
+	read_circuit->wire_mapping[read_circuit->gate_list[i].output - init_input_dff_size] = i;
   }
 
   for (uint64_t i = 0; i < read_circuit->dff_size; i++) {
