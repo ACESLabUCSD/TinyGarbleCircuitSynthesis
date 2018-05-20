@@ -1,5 +1,5 @@
 # Benchmarks
-This directory contains implementations of benchmark functions 2-party GC.
+This directory contains implementations of benchmark functions for 2-party GC.
 
 For multi-party benchmarks visit [here](https://github.com/sadeghriazi/mpc-circuits).
 
