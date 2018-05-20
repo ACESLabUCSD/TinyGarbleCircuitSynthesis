@@ -1,7 +1,7 @@
 # Benchmarks
 This directory contains implementations of benchmark functions 2-party GC.
 
-For multi-party benhmarks visit [here](https://github.com/sadeghriazi/mpc-circuits).
+For multi-party benchmarks visit [here](https://github.com/sadeghriazi/mpc-circuits).
 
 ## Compile a benchmark
 Go inside `benchmark`, where benchmark is the name of the function
