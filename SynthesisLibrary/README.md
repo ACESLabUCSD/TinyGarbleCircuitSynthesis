@@ -1,14 +1,13 @@
 # Circuit Synthesis
 
 ## Dependencies
-Netlist generation requires Synopsys Design Compiler or Yosys-ABC synthesis
-tools.
+Netlist generation requires [Synopsys Design Compiler](https://www.synopsys.com/support/training/rtl-synthesis/design-compiler-rtl-synthesis.html) or [Yosys-ABC](http://www.clifford.at/yosys/) synthesis tools.
 
 ## Libraries
-- syn_lib: Free-XOR optimized implementation of common arithmetic and logical operations.
-- lib: Free-XOR optimized cell library for [TinyGarble](https://github.com/esonghori/TinyGarble). Includes all possible combinations of four entry truth tables. 
-- lib_EMP: Free-XOR optimized cell library for [EMP-Toolkit](https://github.com/emp-toolkit). Includes three logic cells (AND, XOR, NOT) currently supported. 
-- lib_BMR: Free-XOR optimized cell library for [Semi-Honest-BMR](https://github.com/cryptobiu/Semi-Honest-BMR). Includes five logic cells (AND, NOR, XOR, XNOR, NOT) currently supported. 
+- **syn_lib**: Free-XOR optimized implementation of common arithmetic and logical operations.
+- **lib**: Free-XOR optimized cell library for [TinyGarble](https://github.com/esonghori/TinyGarble). Includes all possible combinations of four entry truth tables. 
+- **lib_EMP**: Free-XOR optimized cell library for [EMP-Toolkit](https://github.com/emp-toolkit). Includes three logic cells (AND, XOR, NOT) currently supported. 
+- **lib_BMR**: Free-XOR optimized cell library for [Semi-Honest-BMR](https://github.com/cryptobiu/Semi-Honest-BMR). Includes five logic cells (AND, NOR, XOR, XNOR, NOT) currently supported. 
 
 ### Compile library (for Synopsys Design Compiler)
 [This part is required only if the cell libraries for Synopsys DC needs to be updated. Otherwise please skip.]
@@ -22,7 +21,7 @@ _Advanced detailed_: Let's suppose that our\_lib.lib is located in
 /path/to/our\_lib.
 
 - Go inside /path/to/our\_lib and run:
-```
+```bash
 	$ lc_shell
 	lc_shell> set search_path [concat /path/to/our_lib/]
 	lc_shell> read_lib our_lib.lib
@@ -34,9 +33,7 @@ Please ignore "lc_shell>" for them].
 
 ## Manual for Synopsys Design Compiler
 
-### Compile a circuit
-
-```
+```bash
 	$ design_vision
 	design_vision> set path <path-to-this-repo>/SynthesisLibrary
 	design_vision> set lib_path $path/lib #change library for EMP or BMR
@@ -63,40 +60,40 @@ starting with "design\_vision>" should be called inside `design_vision`.
 Please ignore "design\_vision>" for them.]
 
 Alternatively, write the commands in a `.dcsh` file and run
+```bash
+	$ design_vision -no_gui -f <user-file>.dcsh
 ```
-	design_vision -no_gui -f <user-file>.dcsh
-```
-A sample `.dcsh` file is provided in the `script` directory.
+A [sample](script/sample.dcsh) `.dcsh` file is provided in the `script` directory.
 	
 ## Manual for Yosys
 
-```
-$ yosys
-yosys> read_verilog <path-to-this-repo>/SynthesisLibrary/syn_lib/*.v
-yosys> read_verilog <list-of-user-files>
-yosys> hierarchy -check -top <top-module>
-yosys> proc; opt; flatten; opt; 
-yosys> techmap ; opt;
-yosys> abc -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
-yosys> opt; clean; opt;
-yosys> opt_clean -purge
-yosys> stat -liberty ../git/TinyGarbleCircuitSynthesis/SynthesisLibrary/lib/asic_cell_yosys.lib
-yosys> write_verilog -noattr -noexpr <top-module>_syn_yos.v
-yosys> exit
+```bash
+	$ yosys
+	yosys> read_verilog <path-to-this-repo>/SynthesisLibrary/syn_lib/*.v
+	yosys> read_verilog <list-of-user-files>
+	yosys> hierarchy -check -top <top-module>
+	yosys> proc; opt; flatten; opt; 
+	yosys> techmap ; opt;
+	yosys> abc -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
+	yosys> opt; clean; opt;
+	yosys> opt_clean -purge
+	yosys> stat -liberty ../git/TinyGarbleCircuitSynthesis/SynthesisLibrary/lib/asic_cell_yosys.lib
+	yosys> write_verilog -noattr -noexpr <top-module>_syn_yos.v
+	yosys> exit
 ```	
 It creates `<top-module>_syn_yos.v` in the current directory. [Note: commands starting with "yosys>" should be called inside yosys.
 Please ignore "yosys>" for them.]
 
 Alternatively, write the commands in a `.yos` file and run
+```bash
+	$ yosys -s <user-file>.yos
 ```
-	yosys -s <user-file>.yos
-```
-A sample `.yos` file is provided in the `script` directory.
+A [sample](script/sample.yos) `.yos` file is provided in the `script` directory.
 
 ## Counting number of gates
 You can use `script/count.sh` to count the number of gates in
 the generated netlist file. For counting gates in
 `/path/to/benchmark/benchmark_syn.v`, simply run:
-```
+```bash
 	$ script/count.sh /path/to/benchmark/benchmark_syn.v
 ```
