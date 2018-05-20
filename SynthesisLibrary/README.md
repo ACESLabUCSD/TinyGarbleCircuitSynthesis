@@ -38,24 +38,24 @@ Please ignore "lc_shell>" for them].
 
 ```
 	$ design_vision
-	design_vision> set path <b><path-to-this-repo></b>/SynthesisLibrary
-	design_vision> set lib_path $path/lib <b>#change library for EMP or BMR</b>
+	design_vision> set path <path-to-this-repo>/SynthesisLibrary
+	design_vision> set lib_path $path/lib #change library for EMP or BMR
 	design_vision> set syn_path $path/syn_lib
 	design_vision> set search_path [list . $lib_path/dff_full/ $syn_path]
 	design_vision> set target_library $lib_path/dff_full/dff_full.db
 	design_vision> set link_library $lib_path/dff_full/dff_full.db
 	design_vision> set symbol_library [concat $lib_path/generic.sdb]
 	design_vision> set hdlin_while_loop_iterations 2049
-	design_vision> analyze -format verilog {<b><list-of-functions-from-syn_lib-used-in-the-circuit></b>}
-	design_vision> analyze -format verilog {<b><list-of-user-files></b>}
-	design_vision> elaborate <b><top-module></b> -architecture verilog -library DEFAULT -update 
+	design_vision> analyze -format verilog {<list-of-functions-from-syn_lib-used-in-the-circuit>}
+	design_vision> analyze -format verilog {<list-of-user-files>}
+	design_vision> elaborate <top-module> -architecture verilog -library DEFAULT -update 
 	design_vision> set_max_area -ignore_tns 0 
 	design_vision> set_flatten false -design *
 	design_vision> set_structure -design * false
 	design_vision> set_resource_allocation area_only
 	design_vision> report_compile_options
 	design_vision> compile -ungroup_all  -map_effort low -area_effort low -no_design_rule
-	design_vision> write -hierarchy -format verilog -output <b><top-module></b>_syn.v
+	design_vision> write -hierarchy -format verilog -output <top-module>_syn.v
 	design_vision> exit
 ```
 It creates `<top-module>_syn.v` in the current directory. [Note: commands
@@ -64,7 +64,7 @@ Please ignore "design\_vision>" for them.]
 
 Alternatively, write the commands in a `.dcsh` file and run
 ```
-	design_vision -no_gui -f <b><user-file></b>.dcsh
+	design_vision -no_gui -f <user-file>.dcsh
 ```
 A sample `.dcsh` file is provided in the `script` directory.
 	
@@ -72,16 +72,16 @@ A sample `.dcsh` file is provided in the `script` directory.
 
 ```
 $ yosys
-yosys> read_verilog <b><path-to-this-repo></b>/SynthesisLibrary/syn_lib/*.v
-yosys> read_verilog <b><list-of-user-files></b>
-yosys> hierarchy -check -top <b><top-module></b>
+yosys> read_verilog <path-to-this-repo>/SynthesisLibrary/syn_lib/*.v
+yosys> read_verilog <list-of-user-files>
+yosys> hierarchy -check -top <top-module>
 yosys> proc; opt; flatten; opt; 
 yosys> techmap ; opt;
-yosys> abc -liberty <b><path-to-this-repo></b>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <b><path-to-this-repo></b>/SynthesisLibrary/lib/script.abc; <b>#change library for EMP or BMR</b>
+yosys> abc -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
 yosys> opt; clean; opt;
 yosys> opt_clean -purge
 yosys> stat -liberty ../git/TinyGarbleCircuitSynthesis/SynthesisLibrary/lib/asic_cell_yosys.lib
-yosys> write_verilog -noattr -noexpr <b><top-module></b>_syn_yos.v
+yosys> write_verilog -noattr -noexpr <top-module>_syn_yos.v
 yosys> exit
 ```	
 It creates `<top-module>_syn_yos.v` in the current directory. [Note: commands starting with "yosys>" should be called inside yosys.
@@ -89,7 +89,7 @@ Please ignore "yosys>" for them.]
 
 Alternatively, write the commands in a `.yos` file and run
 ```
-	yosys -s <b><user-file></b>.yos
+	yosys -s <user-file>.yos
 ```
 A sample `.yos` file is provided in the `script` directory.
 
