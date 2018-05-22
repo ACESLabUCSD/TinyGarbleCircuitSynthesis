@@ -55,7 +55,8 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
   f << read_circuit.gate_size << " " << wire_size << endl;
   f << read_circuit.g_input_size << " " << read_circuit.e_input_size << " " <<  read_circuit.output_size << endl << endl;
   
-    for (uint64_t i = 0; i < read_circuit.gate_size; i++) {
+    for (uint64_t j = 0; j < read_circuit.gate_size; j++) {
+		uint64_t i =  read_circuit.wire_mapping[read_circuit.task_schedule[j]];
 		if(read_circuit.gate_list[i].type == NOTGATE) {
 			f << "1 1 ";
 			f << read_circuit.gate_list[i].input[0] << " " << read_circuit.gate_list[i].output;
@@ -67,6 +68,10 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 		if(read_circuit.gate_list[i].type == NOTGATE) f << " INV";
 		else if (read_circuit.gate_list[i].type == ANDGATE) f << " AND";
 		else if (read_circuit.gate_list[i].type == XORGATE) f << " XOR";
+		else{ 
+			LOG(ERROR) << "unsupported gate." << endl;
+			return FAILURE;
+		}
 		f << endl;
   }
   
