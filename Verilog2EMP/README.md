@@ -28,16 +28,15 @@ endfor
 
 ## Usage
 ```
-./V2BMR_Main 
+./V2EMP_Main 
 
   -h [ --help ]         produce help message.
   -i [ --netlist ] arg  Input netlist (verilog .v) file address.
-  -b [ --bmr ] arg      Output bmr circuit file address.
+  -o [ --bmr ] arg      Output emp circuit file address.
   -n [ --np ] arg       Number of parties.
   -p [ --perparty ] arg No of bits for every party (seperated by space)
 
 ```
-If arguments to both -n and -p are specified, the argument to -n is ignored.
 
 ## References
 - Xiao Wang and Alex J. Malozemoff and Jonathan Katz. "EMP-toolkit: Efficient MultiParty computation toolkit.", 2016. 
