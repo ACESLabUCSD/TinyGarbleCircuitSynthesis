@@ -16,7 +16,7 @@ module _name_ (
 endmodule 
 ```
 
-## BMR Format
+## EMP Format
 ```
 <No_of_gates> <No_of_wires>
 <Bit_width_of_g_input> <Bit_width_of_e_input> <Bit_width_of_o> 
