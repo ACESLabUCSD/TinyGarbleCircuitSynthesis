@@ -19,3 +19,7 @@ grep -w -c 'XNOR' $1
 grep -w -c 'IV' $1
 grep -w -c 'DFF' $1
 
+echo -n "total non-XOR: "
+grep -w -c 'AND\|ANDN\|NAND\|NANDN\|OR\|ORN\|NOR\|NORN\|MUX\|FA\|HA\|HADDER' $1
+echo -n "total XOR: "
+grep -w -c 'XOR\|XNOR\|IV\|DFF' $1
