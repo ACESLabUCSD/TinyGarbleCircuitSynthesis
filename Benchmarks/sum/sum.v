@@ -3,7 +3,7 @@
 module sum
 #(
 	parameter N=8,
-	parameter CC=1
+	parameter CC=1 //increase CC for sequential design
 )
 ( 
 	clk,
