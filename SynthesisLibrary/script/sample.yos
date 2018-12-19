@@ -6,6 +6,6 @@ techmap ; opt;
 abc -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
 opt; clean; opt;
 opt_clean -purge
-stat -liberty ../git/TinyGarbleCircuitSynthesis/SynthesisLibrary/lib/asic_cell_yosys.lib
+stat -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib
 write_verilog -noattr -noexpr <top-module>_syn_yos.v
 exit

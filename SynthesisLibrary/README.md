@@ -77,7 +77,7 @@ A [sample](script/sample.dcsh) `.dcsh` file is provided in the `script` director
 	yosys> abc -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
 	yosys> opt; clean; opt;
 	yosys> opt_clean -purge
-	yosys> stat -liberty ../git/TinyGarbleCircuitSynthesis/SynthesisLibrary/lib/asic_cell_yosys.lib
+	yosys> stat -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib
 	yosys> write_verilog -noattr -noexpr <top-module>_syn_yos.v
 	yosys> exit
 ```	
