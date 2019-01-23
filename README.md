@@ -7,12 +7,12 @@ Circuit Synthesis for Yao's Garbled Circuit by TinyGarble
 1. Write a Verilog file (`.v`) describing the function. 
 You can utilize the free-XOR optimized implementations of common arithmetic and logical operations provided in the [syn_lib](/SynthesisLibrary/syn_lib/). 
 2. Write a wrapper according to the template provided inside 
-[Verilog2SCD](/Verilog2BMR), [Verilog2EMP](/Verilog2BMR) or [Verilog2BMR](/Verilog2BMR)
+[Verilog2SCD](/Verilog2SCD), [Verilog2EMP](/Verilog2EMP) or [Verilog2BMR](/Verilog2BMR)
 for executing with TinyGarble, EMP Toolkit, and Semi-Honest-BMR respectively. 
 3. Synthesize the Verilog file using TinyGarble's [Synthesis Library](/SynthesisLibrary) to generate
 a netlist Verilog file (`.v`). It supports synthesis with [Synopsys Design Compiler](https://www.synopsys.com/support/training/rtl-synthesis/design-compiler-rtl-synthesis.html) or [Yosys-ABC](http://www.clifford.at/yosys/).
 4. Translate the netlist file (`.v`) to a circuit description file compatible with the respective framework
-following the instructions inside [Verilog2SCD](/Verilog2BMR), [Verilog2EMP](/Verilog2BMR) or [Verilog2BMR](/Verilog2BMR)
+following the instructions inside [Verilog2SCD](/Verilog2SCD), [Verilog2EMP](/Verilog2EMP) or [Verilog2BMR](/Verilog2BMR)
 for executing with TinyGarble, EMP Toolkit, and Semi-Honest-BMR respectively.
 5. Execute the respective framework with the compiled circuit description file. 
 

@@ -32,9 +32,7 @@ endfor
 
   -h [ --help ]         produce help message.
   -i [ --netlist ] arg  Input netlist (verilog .v) file address.
-  -o [ --bmr ] arg      Output emp circuit file address.
-  -n [ --np ] arg       Number of parties.
-  -p [ --perparty ] arg No of bits for every party (seperated by space)
+  -o [ --emp ] arg      Output EMPCircuit file address.
 
 ```
 
