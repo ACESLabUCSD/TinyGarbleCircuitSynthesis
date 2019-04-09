@@ -21,14 +21,36 @@ and must be connected to Flip-Flops’ `I` (initial) ports.
 bit-width should be multiplied by number of clock cycles.
 It is also true for `o` port which will be provided at every clock cycle.
 
+All the init bits from the garbler are concatenated to form a single input `g_init`. 
+Similar concatenations are done for `e_init`, `g_input`,`e_input`, and `o`.
+The module structure is as follows. 
+
+```
+module _name_ ( 
+  input 	clk, rst,
+  input [K-1:0] g_init,
+  input [L-1:0] e_init, 
+  input [M-1:0] g_input,
+  input [N-1:0] e_input,
+  output [P-1:0] o
+  );
+  
+  //description
+  
+endmodule 
+```
+
 ## Wire Indexing
-Wires are indexed according to this order:
-1- g_init
-2- e_init
-3- g_input
-4- e_input
-5- gates' output (A gate's output index is same as the gate's index plus the 
-	gate output offset which is equal to size of init and input wires.)  
+Wires are indexed according to this order:  
+1- g_init  
+2- e_init  
+3- g_input  
+4- e_input  
+5- dffs' output  
+6- gates' output 
+
+The output index of a dff or gate is same as the its index plus the 
+gate output offset which is equal to size of init and input wires.) 
 
 ## SCD Format
 Unlike JustGarble's SCD, TinyGarble's SCD is in ASCII format and human-readable.
@@ -41,6 +63,7 @@ The format consists of seven lines:
 5- `outputs` index
 6- Flip-Flop's `D` (data wire index) 
 7- Flip-Flop's `I` (initial value index chosen from `g_init` and `e_init`).
+
 ## Usage
 #### Compile:
 ```
