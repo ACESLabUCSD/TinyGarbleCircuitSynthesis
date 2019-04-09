@@ -329,7 +329,7 @@ library(dff_full){
 	*/
 
 	cell(IV){
-		area	: 0;
+		area	: 0.1;
 		pin(A){
 			direction	: input;
 			capacitance	: 0;
@@ -344,7 +344,7 @@ library(dff_full){
 	}
 
 	cell(XOR){
-		area	: 0;
+		area	: 0.1;
 		pin(A){
 			direction	: input;
 			capacitance	: 0;
@@ -367,7 +367,7 @@ library(dff_full){
 
 	/*
 	cell(XNOR){
-		area	: 0;
+		area	: 0.1;
 		pin(A){
 			direction	: input;
 			capacitance	: 0;
@@ -389,7 +389,7 @@ library(dff_full){
 	}
 
 	cell (DFF){
-		area	: 0;
+		area	: 0.1;
 		ff(IQ,IQN){
 			next_state	: "D";
 			clocked_on	: "CLK";
