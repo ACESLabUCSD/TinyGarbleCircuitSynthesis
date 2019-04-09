@@ -1,17 +1,17 @@
 library(demo) {
 	cell(IV) {
-		area: 0;
+		area: 1;
 		pin(A) { direction: input; }
 		pin(Z) { direction: output; function: "A'"; }
 	}
 	cell(XOR) {
-		area: 0;
+		area: 1;
 		pin(A) { direction: input; }
 		pin(B) { direction: input; }
 		pin(Z) { direction: output; function: "(A^B)"; }
 	}
 	cell(XNOR) {
-		area: 0;
+		area: 1;
 		pin(A) { direction: input; }
 		pin(B) { direction: input; }
 		pin(Z) { direction: output; function: "(A^B)'"; }

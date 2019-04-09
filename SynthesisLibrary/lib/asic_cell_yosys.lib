@@ -1,17 +1,17 @@
 library(demo) {
 	cell(IV) {
-		area: 0;
+		area: 1;
 		pin(A) { direction: input; }
 		pin(Z) { direction: output; function: "A'"; }
 	}
 	cell(XOR) {
-		area: 0;
+		area: 1;
 		pin(A) { direction: input; }
 		pin(B) { direction: input; }
 		pin(Z) { direction: output; function: "(A^B)"; }
 	}
 	cell(XNOR) {
-		area: 0;
+		area: 1;
 		pin(A) { direction: input; }
 		pin(B) { direction: input; }
 		pin(Z) { direction: output; function: "(A^B)'"; }
@@ -73,7 +73,7 @@ library(demo) {
 		pin(SUM) { direction: output; function: "IN0^IN1^CIN"; }
 	}
 	cell(DFF) {
-    area: 0;
+    area: 1;
     ff("IQ", "IQN") { clocked_on: CLK;
                   next_state: D;
                       preset: I;
@@ -87,7 +87,7 @@ library(demo) {
     pin(RST) { direction: input; }
     }
 	/*cell(DFF) {
-	    area: 0;
+	    area: 1;
 	    ff(IQ, IQN) { clocked_on: CLK;
 		          next_state: D;
 		               clear: RST; }
