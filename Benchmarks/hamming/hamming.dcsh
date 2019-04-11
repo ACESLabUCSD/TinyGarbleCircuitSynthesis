@@ -8,8 +8,20 @@ analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibr
 
 analyze -format verilog hamming.v
 
-foreach n {32  160  512} {
+foreach n {16  32  64} {
 set cc 1
+elaborate hamming -architecture verilog -library DEFAULT -update -parameters $n,$cc
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure -design * false
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all -boundary_optimization  -map_effort high -area_effort high -no_design_rule
+write -hierarchy -format verilog -output syn/hamming_${n}bit_${cc}cc.v
+}
+
+foreach n {32 512} {
+set cc $n
 elaborate hamming -architecture verilog -library DEFAULT -update -parameters $n,$cc
 set_max_area -ignore_tns 0 
 set_flatten false -design *

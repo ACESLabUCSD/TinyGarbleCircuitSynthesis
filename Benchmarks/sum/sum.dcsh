@@ -10,7 +10,7 @@ analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibr
 analyze -format verilog sum.v
 
 foreach n {32} {
-foreach cc {32} {
+foreach cc $n {
 elaborate sum -architecture verilog -library DEFAULT -update -parameters $n,$cc
 set_max_area -ignore_tns 0 
 set_flatten false -design *
@@ -18,7 +18,20 @@ set_structure false -design *
 set_resource_allocation area_only
 report_compile_options
 compile -ungroup_all  -map_effort high -area_effort high -no_design_rule
-write -hierarchy -format verilog -output syn/sum_syn_$n\_$cc.v
+write -hierarchy -format verilog -output syn/sum_$n\_$cc.v
+}
+}
+
+foreach n {6 8} {
+foreach cc {1} {
+elaborate sum -architecture verilog -library DEFAULT -update -parameters $n,$cc
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure false -design *
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all  -map_effort high -area_effort high -no_design_rule
+write -hierarchy -format verilog -output syn/sum_${n}bit\_${cc}cc.v
 }
 }
 

@@ -20,6 +20,6 @@ set_structure false -design *
 set_resource_allocation area_only
 report_compile_options
 compile -ungroup_all -map_effort high -area_effort high -no_design_rule
-write -hierarchy -format verilog -output syn/cordic.v
+write -hierarchy -format verilog -output syn/cordic_$DEC_$FRAC_$MOD_$DIR.v
 
 exit
