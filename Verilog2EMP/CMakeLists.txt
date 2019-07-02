@@ -108,3 +108,6 @@ configure_file(
   "V2EMP_ALL.sh.in"
   "V2EMP_ALL.sh"
   @ONLY)
+  
+execute_process(COMMAND 
+                chmod +x V2EMP_ALL.sh)
