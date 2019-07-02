@@ -5,7 +5,7 @@ cd bin
 cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_LOG=ON ..
 if [ $? -eq 0 ]
 then
-  echo "Config is done. Now call '$ cd bin' and then '$ make' to compile TinyGarble-BMR."
+  echo "Config is done. Now call '$ cd bin' and then '$ make' to compile TinyGarble-EMP."
 fi
 
 

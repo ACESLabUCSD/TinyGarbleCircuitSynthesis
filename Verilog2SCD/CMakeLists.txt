@@ -97,3 +97,14 @@ if (Boost_FOUND)
 endif (Boost_FOUND)
 target_link_libraries(V2SCD_Main -lrt)
 
+
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/netlists)
+
+execute_process(COMMAND
+                tar -xf ${CMAKE_CURRENT_SOURCE_DIR}/v.tar.gz 
+				     -C ${CMAKE_CURRENT_BINARY_DIR}/netlists)
+
+configure_file(
+  "V2SCD_ALL.sh.in"
+  "V2SCD_ALL.sh"
+  @ONLY)

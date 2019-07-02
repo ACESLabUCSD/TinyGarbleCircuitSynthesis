@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+for verilogfile in @CMAKE_CURRENT_BINARY_DIR@/netlists/*.v
+do
+  empfile=${verilogfile%.*}.emp
+  @CMAKE_CURRENT_BINARY_DIR@/V2EMP_Main -i $verilogfile -o $empfile --log2std &
+done
+wait

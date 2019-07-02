@@ -84,7 +84,7 @@ add_library (EMPCircuit OBJECT
 add_library (V2EMPCircuit OBJECT
   "v_2_EMPCircuit.cpp")
 
-add_executable(V2EMPCircuit_Main
+add_executable(V2EMP_Main
   "v_2_EMPCircuit_main.cpp"
   "$<TARGET_OBJECTS:V2EMPCircuit>"
   "$<TARGET_OBJECTS:ParseNetlist>"
@@ -93,6 +93,18 @@ add_executable(V2EMPCircuit_Main
   "$<TARGET_OBJECTS:Util_Log>")
 
 if (Boost_FOUND)
-  target_link_libraries(V2EMPCircuit_Main ${Boost_LIBRARIES})
+  target_link_libraries(V2EMP_Main ${Boost_LIBRARIES})
 endif (Boost_FOUND)
-target_link_libraries(V2EMPCircuit_Main -lrt)
+target_link_libraries(V2EMP_Main -lrt)
+
+
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/netlists)
+
+execute_process(COMMAND
+                tar -xf ${CMAKE_CURRENT_SOURCE_DIR}/v.tar.gz 
+				     -C ${CMAKE_CURRENT_BINARY_DIR}/netlists)
+
+configure_file(
+  "V2EMP_ALL.sh.in"
+  "V2EMP_ALL.sh"
+  @ONLY)
