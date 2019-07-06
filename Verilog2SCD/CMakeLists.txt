@@ -110,4 +110,4 @@ configure_file(
   @ONLY)
   
 execute_process(COMMAND 
-                chmod +x V2EMP_ALL.sh)
+                chmod +x V2SCD_ALL.sh)
