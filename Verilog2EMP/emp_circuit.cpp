@@ -44,16 +44,22 @@
 #include "log.h"
 
 int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
-  std::ofstream f(file_name.c_str(), std::ios::out);
-  if (!f.is_open()) {
-    LOG(ERROR) << "can't open " << file_name << endl;
-    return -1;
-  }
+	std::ofstream f(file_name.c_str(), std::ios::out);
+	if (!f.is_open()) {
+		LOG(ERROR) << "can't open " << file_name << endl;
+		return -1;
+	}
   
-  int wire_size = read_circuit.gate_size + read_circuit.g_input_size + read_circuit.e_input_size;
-  
-  f << read_circuit.gate_size << " " << wire_size << endl;
-  f << read_circuit.g_input_size << " " << read_circuit.e_input_size << " " <<  read_circuit.output_size << endl << endl;
+	int wire_size = read_circuit.gate_size + read_circuit.g_input_size + read_circuit.e_input_size;
+	
+	f << read_circuit.gate_size << " " << wire_size << endl;
+	f << read_circuit.g_input_size << " " << read_circuit.e_input_size << " " <<  read_circuit.output_size << endl << endl;
+	
+	for (uint64_t i = 0; i < read_circuit.dff_size; i++) {
+		f << "2 1 ";
+		f << read_circuit.dff_list[i].input[0] << " " << read_circuit.dff_list[i].input[1] << " " << read_circuit.dff_list[i].output;	//0->D; 1->I
+		f << " DFF" << endl;
+	}
   
     for (uint64_t j = 0; j < read_circuit.gate_size; j++) {
 		uint64_t i =  read_circuit.wire_mapping[read_circuit.task_schedule[j]];
@@ -73,7 +79,7 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 			return FAILURE;
 		}
 		f << endl;
-  }
+	}
   
   f.close();
 
