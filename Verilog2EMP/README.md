@@ -16,6 +16,14 @@ module _name_ (
 endmodule 
 ```
 
+## Wire Index
+```
+1. e_input (e_input[0] is placed at wire 0)
+2. g_input
+3. internal wires
+4. o (MSB of o is the wire with the highest index)
+```
+
 ## EMP Format
 ```
 <No_of_gates> <No_of_wires>
