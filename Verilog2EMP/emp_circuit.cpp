@@ -53,7 +53,7 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 	int wire_size = read_circuit.gate_size + read_circuit.g_input_size + read_circuit.e_input_size;
 	
 	f << read_circuit.gate_size << " " << wire_size << endl;
-	f << read_circuit.g_input_size << " " << read_circuit.e_input_size << " " <<  read_circuit.output_size << endl << endl;
+	f << read_circuit.e_input_size << " " << read_circuit.g_input_size << " " <<  read_circuit.output_size << endl << endl;
 	
 	for (uint64_t i = 0; i < read_circuit.dff_size; i++) {
 		f << "2 1 ";

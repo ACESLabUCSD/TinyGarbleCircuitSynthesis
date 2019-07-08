@@ -520,9 +520,9 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
                &wire_index);
   AddWireArray(wire_name_table, "p_input", read_circuit->p_input_size,
                &wire_index);
-  AddWireArray(wire_name_table, "g_input", read_circuit->g_input_size,
-               &wire_index);
   AddWireArray(wire_name_table, "e_input", read_circuit->e_input_size,
+               &wire_index);
+  AddWireArray(wire_name_table, "g_input", read_circuit->g_input_size,
                &wire_index);
 
   for (uint64_t i = 0; i < read_circuit->dff_size; i++) {
