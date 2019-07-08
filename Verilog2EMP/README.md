@@ -27,7 +27,7 @@ endmodule
 ## EMP Format
 ```
 <No_of_gates> <No_of_wires>
-<Bit_width_of_g_input> <Bit_width_of_e_input> <Bit_width_of_o> 
+<Bit_width_of_e_input> <Bit_width_of_g_input> <Bit_width_of_o> 
 
 for g = 0 to <No_of_gates>-1
 	<No_of_input_bit><No_of_output_bit> <index of input0 wire> <index of input1 wire>  <index of output wire> <LOGIC>
