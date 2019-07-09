@@ -50,9 +50,10 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 		return -1;
 	}
   
-	int wire_size = read_circuit.gate_size + read_circuit.g_input_size + read_circuit.e_input_size;
+	int dff_gate_size = read_circuit.dff_size + read_circuit.gate_size;
+	int wire_size = read_circuit.dff_size + read_circuit.gate_size + read_circuit.g_input_size + read_circuit.e_input_size;
 	
-	f << read_circuit.gate_size << " " << wire_size << endl;
+	f << dff_gate_size << " " << wire_size << endl;
 	f << read_circuit.e_input_size << " " << read_circuit.g_input_size << " " <<  read_circuit.output_size << endl << endl;
 	
 	for (uint64_t i = 0; i < read_circuit.dff_size; i++) {
