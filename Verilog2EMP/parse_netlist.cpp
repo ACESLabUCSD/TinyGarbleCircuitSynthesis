@@ -514,13 +514,13 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
 
   AddWireArray(wire_name_table, "p_init", read_circuit->p_init_size,
                &wire_index);
-  AddWireArray(wire_name_table, "g_init", read_circuit->g_init_size,
+  AddWireArray(wire_name_table, "p_input", read_circuit->p_input_size,
                &wire_index);
   AddWireArray(wire_name_table, "e_init", read_circuit->e_init_size,
                &wire_index);
-  AddWireArray(wire_name_table, "p_input", read_circuit->p_input_size,
-               &wire_index);
   AddWireArray(wire_name_table, "e_input", read_circuit->e_input_size,
+               &wire_index);
+  AddWireArray(wire_name_table, "g_init", read_circuit->g_init_size,
                &wire_index);
   AddWireArray(wire_name_table, "g_input", read_circuit->g_input_size,
                &wire_index);

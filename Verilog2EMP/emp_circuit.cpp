@@ -49,12 +49,19 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 		LOG(ERROR) << "can't open " << file_name << endl;
 		return -1;
 	}
-  
-	int dff_gate_size = read_circuit.dff_size + read_circuit.gate_size;
-	int wire_size = read_circuit.dff_size + read_circuit.gate_size + read_circuit.g_input_size + read_circuit.e_input_size;
 	
-	f << dff_gate_size << " " << wire_size << endl;
-	f << read_circuit.e_input_size << " " << read_circuit.g_input_size << " " <<  read_circuit.output_size << endl << endl;
+	int num_gate, num_wire, n1, n1_0, n2, n2_0, n3;
+  
+	num_gate = read_circuit.dff_size + read_circuit.gate_size;
+	n1 = read_circuit.e_init_size + read_circuit.e_input_size;
+	n1_0 = read_circuit.e_init_size;
+	n2 = read_circuit.g_init_size + read_circuit.g_input_size;
+	n2_0 = read_circuit.g_init_size;
+	num_wire = num_gate + n1 + n2;
+	n3 = read_circuit.output_size;
+	
+	f << num_gate << " " << num_wire << endl;
+	f << n1 << " " << n1_0 << " " << n2 << " " << n2_0 << " " <<  n3 << endl << endl;
 	
 	for (uint64_t i = 0; i < read_circuit.dff_size; i++) {
 		f << "2 1 ";
