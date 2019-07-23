@@ -50,6 +50,12 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 		return -1;
 	}
 	
+	/*In IdAssignment, constants 0 and 1 are assigned IDs -2 and -1 respecetively.
+	Here we adjust the wire IDs such that constants 0 and 1 are assigned IDs 0 and 1 respecetively,
+	and the rest of the wire IDs are shifted by 2. 
+	num_wire includes the number of constant wires (2).
+	*/
+	
 	int num_gate, num_wire, n1, n1_0, n2, n2_0, n3;
   
 	num_gate = read_circuit.dff_size + read_circuit.gate_size;
@@ -57,7 +63,7 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 	n1_0 = read_circuit.e_init_size;
 	n2 = read_circuit.g_init_size + read_circuit.g_input_size;
 	n2_0 = read_circuit.g_init_size;
-	num_wire = num_gate + n1 + n2;
+	num_wire = num_gate + n1 + n2 + NUM_CONST;
 	n3 = read_circuit.output_size;
 	
 	f << num_gate << " " << num_wire << endl;
@@ -65,7 +71,7 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 	
 	for (uint64_t i = 0; i < read_circuit.dff_size; i++) {
 		f << "2 1 ";
-		f << read_circuit.dff_list[i].input[0] << " " << read_circuit.dff_list[i].input[1] << " " << read_circuit.dff_list[i].output;	//0->D; 1->I
+		f << read_circuit.dff_list[i].input[0] + NUM_CONST << " " << read_circuit.dff_list[i].input[1] + NUM_CONST << " " << read_circuit.dff_list[i].output + NUM_CONST;	//0->D; 1->I
 		f << " DFF" << endl;
 	}
   
@@ -73,11 +79,11 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 		uint64_t i =  read_circuit.wire_mapping[read_circuit.task_schedule[j]];
 		if(read_circuit.gate_list[i].type == NOTGATE) {
 			f << "1 1 ";
-			f << read_circuit.gate_list[i].input[0] << " " << read_circuit.gate_list[i].output;
+			f << read_circuit.gate_list[i].input[0] + NUM_CONST << " " << read_circuit.gate_list[i].output + NUM_CONST;
 		}
 		else {
 			f << "2 1 ";
-			f << read_circuit.gate_list[i].input[0] << " " << read_circuit.gate_list[i].input[1] << " " << read_circuit.gate_list[i].output;
+			f << read_circuit.gate_list[i].input[0] + NUM_CONST << " " << read_circuit.gate_list[i].input[1] + NUM_CONST << " " << read_circuit.gate_list[i].output + NUM_CONST;
 		}
 		if(read_circuit.gate_list[i].type == NOTGATE) f << " INV";
 		else if (read_circuit.gate_list[i].type == ANDGATE) f << " AND";
