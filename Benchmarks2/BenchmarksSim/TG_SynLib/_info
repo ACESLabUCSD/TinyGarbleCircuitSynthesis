@@ -1,0 +1,424 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/siamhuss/Documents/git/TinyGarbleCircuitSynthesis/Benchmarks2/BenchmarksSim
+vADD
+Z1 !s110 1563871758
+!i10b 1
+!s100 :oUdKeBNm?ECjNYGc2H]42
+IM<o<]R?QCO;8OoBG@O=^:3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1562873116
+8../../SynthesisLibrary/syn_lib/ADD.v
+F../../SynthesisLibrary/syn_lib/ADD.v
+L0 3
+Z4 OV;L;10.6d;65
+r1
+!s85 0
+31
+Z5 !s108 1563871757.000000
+!s107 ../../SynthesisLibrary/syn_lib/square_root.v|../../SynthesisLibrary/syn_lib/TwosComplement.v|../../SynthesisLibrary/syn_lib/SUB_.v|../../SynthesisLibrary/syn_lib/SUB.v|../../SynthesisLibrary/syn_lib/SHIFT_RIGHT.v|../../SynthesisLibrary/syn_lib/SHIFT_LEFT.v|../../SynthesisLibrary/syn_lib/MUX.v|../../SynthesisLibrary/syn_lib/MULT_.v|../../SynthesisLibrary/syn_lib/MULT.v|../../SynthesisLibrary/syn_lib/FA.v|../../SynthesisLibrary/syn_lib/DIV_.v|../../SynthesisLibrary/syn_lib/DIV.v|../../SynthesisLibrary/syn_lib/COUNT.v|../../SynthesisLibrary/syn_lib/COMP.v|../../SynthesisLibrary/syn_lib/ADD_.v|../../SynthesisLibrary/syn_lib/ADD.v|
+Z6 !s90 -reportprogress|300|-work|TG_SynLib|../../SynthesisLibrary/syn_lib/ADD.v|../../SynthesisLibrary/syn_lib/ADD_.v|../../SynthesisLibrary/syn_lib/COMP.v|../../SynthesisLibrary/syn_lib/COUNT.v|../../SynthesisLibrary/syn_lib/DIV.v|../../SynthesisLibrary/syn_lib/DIV_.v|../../SynthesisLibrary/syn_lib/FA.v|../../SynthesisLibrary/syn_lib/MULT.v|../../SynthesisLibrary/syn_lib/MULT_.v|../../SynthesisLibrary/syn_lib/MUX.v|../../SynthesisLibrary/syn_lib/SHIFT_LEFT.v|../../SynthesisLibrary/syn_lib/SHIFT_RIGHT.v|../../SynthesisLibrary/syn_lib/SUB.v|../../SynthesisLibrary/syn_lib/SUB_.v|../../SynthesisLibrary/syn_lib/TwosComplement.v|../../SynthesisLibrary/syn_lib/square_root.v|
+!i113 1
+Z7 o-work TG_SynLib
+Z8 tCvgOpt 0
+n@a@d@d
+vADD_
+R1
+!i10b 1
+!s100 _T>CIHJb3l2n=ZJC7ad?_3
+I0S_4c@h3_RUzgfTfU1]AT3
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/ADD_.v
+F../../SynthesisLibrary/syn_lib/ADD_.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+Z9 !s107 ../../SynthesisLibrary/syn_lib/square_root.v|../../SynthesisLibrary/syn_lib/TwosComplement.v|../../SynthesisLibrary/syn_lib/SUB_.v|../../SynthesisLibrary/syn_lib/SUB.v|../../SynthesisLibrary/syn_lib/SHIFT_RIGHT.v|../../SynthesisLibrary/syn_lib/SHIFT_LEFT.v|../../SynthesisLibrary/syn_lib/MUX.v|../../SynthesisLibrary/syn_lib/MULT_.v|../../SynthesisLibrary/syn_lib/MULT.v|../../SynthesisLibrary/syn_lib/FA.v|../../SynthesisLibrary/syn_lib/DIV_.v|../../SynthesisLibrary/syn_lib/DIV.v|../../SynthesisLibrary/syn_lib/COUNT.v|../../SynthesisLibrary/syn_lib/COMP.v|../../SynthesisLibrary/syn_lib/ADD_.v|../../SynthesisLibrary/syn_lib/ADD.v|
+R6
+!i113 1
+R7
+R8
+n@a@d@d_
+vCOMP
+R1
+!i10b 1
+!s100 0FHDmEU0F8^cQJhMaCPY82
+I2D?Y9z2^<IC7WPO<1gfMV0
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/COMP.v
+F../../SynthesisLibrary/syn_lib/COMP.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@c@o@m@p
+vCOUNT
+R1
+!i10b 1
+!s100 ZCU@:XBPFdOgYeHz0JBFK2
+IN5?jj=AG_^ZG3>gGigzX<3
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/COUNT.v
+F../../SynthesisLibrary/syn_lib/COUNT.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@c@o@u@n@t
+vDIV
+R1
+!i10b 1
+!s100 ZDMeJ[0:CVQ=3`QiX8^6c1
+I6JZTdXG6UY0MjK?W;h>b61
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/DIV.v
+F../../SynthesisLibrary/syn_lib/DIV.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@d@i@v
+vDIV_
+R1
+!i10b 1
+!s100 S9SL_@2dc^R^4H6_SOj7z2
+IiH?SoFcO1LL>S8i]YaeiE2
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/DIV_.v
+F../../SynthesisLibrary/syn_lib/DIV_.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@d@i@v_
+vFA
+R1
+!i10b 1
+!s100 AG3?HzeMGJJCHI7z`9S?H2
+Io<4mmO[GBo_Q?<a6@RQnY3
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/FA.v
+F../../SynthesisLibrary/syn_lib/FA.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@f@a
+vMULT
+R1
+!i10b 1
+!s100 ^G3oRGT]QZcWlf:LE9k3K1
+I2EdFQ3Jf[e3Q=H5Wco>[73
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/MULT.v
+F../../SynthesisLibrary/syn_lib/MULT.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@m@u@l@t
+vMULT_
+R1
+!i10b 1
+!s100 41ZET4J?VOB]J45S@eX501
+I3=m:PQGJBLIAh]61WRJ;:1
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/MULT_.v
+F../../SynthesisLibrary/syn_lib/MULT_.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@m@u@l@t_
+vMUX
+R1
+!i10b 1
+!s100 f77SNYC7RV>ezEX3HS2zf0
+IcZ@5PFeoIdAh@l47;`onY1
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/MUX.v
+F../../SynthesisLibrary/syn_lib/MUX.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@m@u@x
+vSHIFT_LEFT
+R1
+!i10b 1
+!s100 n?SGD[OF]CV<E2NHYFzXM2
+IjnBIGhI_8B9Dh^Gm>ACUP1
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/SHIFT_LEFT.v
+F../../SynthesisLibrary/syn_lib/SHIFT_LEFT.v
+L0 4
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@s@h@i@f@t_@l@e@f@t
+vSHIFT_RIGHT
+R1
+!i10b 1
+!s100 63>_C<mdYV5L1E>gKSMLa3
+I`YPGTA>6=`e>UocWR3XV01
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/SHIFT_RIGHT.v
+F../../SynthesisLibrary/syn_lib/SHIFT_RIGHT.v
+L0 4
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@s@h@i@f@t_@r@i@g@h@t
+vsquar_root_comb_unit
+R1
+!i10b 1
+!s100 R=hbPg4ATYW=W7loC]`2_1
+IMlan_:10n40;JiegZg_m?0
+R2
+R0
+R3
+Z10 8../../SynthesisLibrary/syn_lib/square_root.v
+Z11 F../../SynthesisLibrary/syn_lib/square_root.v
+L0 26
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+vsquar_root_seq_unit
+R1
+!i10b 1
+!s100 oB9?M<McH46dZ@mCAV2bm3
+I7_aL^LHJFL77aH@`n8Cma0
+R2
+R0
+R3
+R10
+R11
+L0 110
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+vsquare_root_comb
+R1
+!i10b 1
+!s100 kc8Y:`]ef2dS1:6C]K0f@2
+IXKN>9O3J?CC0JRl;P1YFT2
+R2
+R0
+R3
+R10
+R11
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+vsquare_root_seq
+R1
+!i10b 1
+!s100 dFAT=4j=6W>Uf133?RBHB1
+IL_[;1oXCFDD<bezn2B[:[3
+R2
+R0
+R3
+R10
+R11
+L0 45
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+vSUB
+R1
+!i10b 1
+!s100 8l6lVCBMjY0oGUOfY:41j2
+I4LXCoiVGT8XNo:[BmoX<n1
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/SUB.v
+F../../SynthesisLibrary/syn_lib/SUB.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@s@u@b
+vSUB_
+R1
+!i10b 1
+!s100 ilnzTK^7Z^b>z3feV]nMC0
+I;]clK^NN3G15FAEcG`>7f1
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/SUB_.v
+F../../SynthesisLibrary/syn_lib/SUB_.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@s@u@b_
+vTwosComplement
+R1
+!i10b 1
+!s100 ;bUfR4mg@B==[HmQ6T2fc0
+IXTG74N`J`zY6R_[hoLGEL2
+R2
+R0
+R3
+8../../SynthesisLibrary/syn_lib/TwosComplement.v
+F../../SynthesisLibrary/syn_lib/TwosComplement.v
+L0 3
+R4
+r1
+!s85 0
+31
+R5
+R9
+R6
+!i113 1
+R7
+R8
+n@twos@complement
