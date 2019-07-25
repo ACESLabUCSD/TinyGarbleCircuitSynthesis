@@ -1,30 +1,7 @@
+`include "../Headers/Common_H.vh"
 `timescale 1ns / 1ps
 
 module tb_aes_1cc;
-
-	function automatic [127:0] changeEndian;
-		input [127:0] text;
-		begin
-			changeEndian = {
-				text[7:0],
-				text[15:8],
-				text[23:16],
-				text[31:24],
-				text[39:32],
-				text[47:40],
-				text[55:48],
-				text[63:56],
-				text[71:64],
-				text[79:72],
-				text[87:80],
-				text[95:88],
-				text[103:96],
-				text[111:104],
-				text[119:112],
-				text[127:120]
-			};
-		end
-	endfunction
 
 	reg [127:0] g_input;
 	reg [127:0] e_input;

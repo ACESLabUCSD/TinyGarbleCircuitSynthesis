@@ -2,7 +2,7 @@
 
 module tb_mult_mnbit_ncc;
 
-parameter N = 1024, M = N; 
+parameter N = 8, M = N; 
 
 logic				clk, rst;
 logic	[0:0] 		g_input;
@@ -48,8 +48,8 @@ initial begin
 	@(posedge clk);
 	O[k+N] = o;
 	@(posedge clk);
-	$display("G = %d, e_init = %d, O = %d, O_ref = %d\n", G, e_init, O, O_ref);
-	$display("error = %d\n", O-O_ref);
+	$display("G = %H, e_init = %H, O = %H, O_ref = %H\n", G, e_init, O, O_ref);
+	$display("error = %H\n", O-O_ref);
 	$stop();
 end
 

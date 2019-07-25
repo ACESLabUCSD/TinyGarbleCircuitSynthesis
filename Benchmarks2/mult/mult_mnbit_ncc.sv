@@ -1,3 +1,4 @@
+`include "../Headers/Common_H.vh"
 `timescale 1ns / 1ps
 
 module mult_mnbit_ncc #(parameter M = 128)( 
@@ -23,16 +24,6 @@ module MULT_seq #(M = 8)(
 	input	[M-1:0] X,
 	output	[0:0] aX
 );
-
-	function automatic integer log2;
-		input [31:0] value;
-		reg [31:0] temp;
-		begin
-			temp = value - 1;
-			for (log2 = 0; temp > 0; log2 = log2 + 1)
-				temp = temp >> 1;
-		end
-	endfunction
 
 	logic [M-1:0] A, X0;
 	
