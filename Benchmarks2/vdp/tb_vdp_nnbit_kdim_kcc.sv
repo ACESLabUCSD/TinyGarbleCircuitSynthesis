@@ -30,10 +30,10 @@ module tb_vdp_nnbit_kdim_kcc;
 		for(k = 0; k < K; k = k + 1)
 			O_ref[k+1] = O_ref[k] + G[k]*E[k];
 		
-		clk <= 1;
-		rst <= 1;
+		clk = 1;
+		rst = 1;
 		@(negedge clk);
-		rst <= 0;
+		rst = 0;
 	end
 
 	always @(posedge clk) begin
@@ -46,7 +46,7 @@ module tb_vdp_nnbit_kdim_kcc;
 			g_input <= G[l];
 			e_input <= E[l];
 			l <= l + 1;
-			$display("g_input = %d, e_input = %d, o = %d, o_ref = %d", g_input, e_input, o, O_ref[l]);
+			$display("g_input = %H, e_input = %H, o = %H, o_ref = %H", g_input, e_input, o, O_ref[l]);
 			
 			if (l == K) $stop();
 		end
