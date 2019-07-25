@@ -33,7 +33,11 @@ module COUNT
 
 	generate
 		if(K2==0) begin: g1
-			assign S2pad = {(K-1){1'b0}};
+			if(K > 1)begin: g1_1  //needed for a modelsim bug
+				assign S2pad = {(K-1){1'b0}};
+			end else begin: g1_0
+				assign S2pad = 1'b0;
+			end
 		end else if (K-K2-1>0) begin: g2
 			assign S2pad = {{(K-K2-1){1'b0}}, S2};
 		end else begin: g3
