@@ -6,11 +6,10 @@ module comp_nbit_1cc #(parameter N = 8)(
 	output		 	o
 );	 
 	 
-	SUB #(.N(N)) SUB_(
+	COMP #(.N(N)) COMP(
 		.A(g_input),
 		.B(e_input),
-		.S(), 
-		.CO(o)
+		.O(o)
 	);
 
 endmodule
