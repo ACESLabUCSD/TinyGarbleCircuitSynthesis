@@ -1,0 +1,12 @@
+read_verilog ../../SynthesisLibrary/syn_lib/*.v
+
+read_verilog -sv sum_nbit_ncc.sv
+hierarchy -check -top sum_nbit_ncc
+proc; opt; flatten; opt; 
+techmap ; opt;
+dfflibmap -liberty ../../SynthesisLibrary/lib_EMP/asic_cell_yosys.lib
+abc -liberty ../../SynthesisLibrary/lib_EMP/asic_cell_yosys.lib -script ../../SynthesisLibrary/lib_EMP/script.abc; 
+opt; clean; opt;
+opt_clean -purge
+stat -liberty ../../SynthesisLibrary/lib/asic_cell_yosys.lib
+write_verilog -noattr -noexpr syn/sum_nbit_ncc_syn_yos.v
