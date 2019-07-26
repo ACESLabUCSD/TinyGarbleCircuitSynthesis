@@ -74,6 +74,7 @@ A [sample](script/sample.dcsh) `.dcsh` file is provided in the `script` director
 	yosys> hierarchy -check -top <top-module>
 	yosys> proc; opt; flatten; opt; 
 	yosys> techmap ; opt;
+	yosys> dfflibmap -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
 	yosys> abc -liberty <path-to-this-repo>/SynthesisLibrary/lib/asic_cell_yosys.lib -script <path-to-this-repo>/SynthesisLibrary/lib/script.abc; #change library for EMP or BMR
 	yosys> opt; clean; opt;
 	yosys> opt_clean -purge
