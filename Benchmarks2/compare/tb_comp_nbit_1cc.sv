@@ -14,7 +14,7 @@ module tb_comp_nbit_1cc;
 		.o(o)
 	);	
 
-	assign o_ref = (g_input < e_input)? 1'b0:1'b1;
+	assign o_ref = (g_input >= e_input);
 	
 	initial begin
 		g_input = 'hA9;
