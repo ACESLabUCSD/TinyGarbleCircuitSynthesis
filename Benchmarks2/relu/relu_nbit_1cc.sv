@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module sum_nbit_1cc #(parameter N = 8)(
+module relu_nbit_1cc #(parameter N = 8)(
 	input	signed	[N-1:0]	s_input,
 	output	signed	[N-1:0] o
 );	 

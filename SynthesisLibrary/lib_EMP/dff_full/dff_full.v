@@ -211,7 +211,7 @@ module IV
 endmodule
 
 
-/*module DFF
+module DFF
 ( 
   CLK,
   RST,
@@ -233,4 +233,4 @@ endmodule
     end
   end
 
-endmodule*/
+endmodule

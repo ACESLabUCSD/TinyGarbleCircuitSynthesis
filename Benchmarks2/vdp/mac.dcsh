@@ -1,0 +1,24 @@
+set search_path [list . ../../SynthesisLibrary/lib_EMP/dff_full/]
+set target_library ../../SynthesisLibrary/lib_EMP/dff_full/dff_full.db
+set link_library ../../SynthesisLibrary/lib_EMP/dff_full/dff_full.db
+set symbol_library [concat ../../SynthesisLibrary/lib_EMP/generic.sdb]
+set hdlin_while_loop_iterations 1024
+
+analyze -format verilog {../../SynthesisLibrary/syn_lib/ADD.v ../../SynthesisLibrary/syn_lib/ADD_.v ../../SynthesisLibrary/syn_lib/COMP.v ../../SynthesisLibrary/syn_lib/COUNT.v ../../SynthesisLibrary/syn_lib/DIV.v ../../SynthesisLibrary/syn_lib/DIV_.v ../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibrary/syn_lib/MULT.v ../../SynthesisLibrary/syn_lib/MULT_.v ../../SynthesisLibrary/syn_lib/MUX.v ../../SynthesisLibrary/syn_lib/SHIFT_LEFT.v ../../SynthesisLibrary/syn_lib/SHIFT_RIGHT.v ../../SynthesisLibrary/syn_lib/SUB.v ../../SynthesisLibrary/syn_lib/SUB_.v ../../SynthesisLibrary/syn_lib/TwosComplement.v ../../SynthesisLibrary/syn_lib/square_root.v }
+
+analyze -format sverilog mac_nnbit_kcc.sv
+
+foreach n {8 16 32} {
+foreach k {3 5 7} {
+elaborate mac_nnbit_kcc -architecture verilog -library DEFAULT -update -parameters $n,$k
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure false -design *
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all  -map_effort high -area_effort high -no_design_rule
+write -hierarchy -format verilog -output syn/mac_${n}_${n}bit\_${k}cc.v
+}
+}
+
+exit

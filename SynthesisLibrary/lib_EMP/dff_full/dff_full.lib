@@ -387,6 +387,7 @@ library(dff_full){
 			}
 		}
 	}
+	*/
 
 	cell (DFF){
 		area	: 0.1;
@@ -446,6 +447,5 @@ library(dff_full){
 			}
 		}
 	}
-	*/
 	
 }

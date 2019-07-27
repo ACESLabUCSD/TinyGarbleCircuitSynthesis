@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module mac_nnbit_1cc #(parameter N = 8, K = 3)( //N: input bit-width, K: vector dimension
+module mac_nnbit_kcc #(parameter N = 8, K = 3)( //N: input bit-width, K: vector dimension
 	input						clk, rst,
 	input	signed	[N-1:0] 	g_input,
 	input	signed	[N-1:0] 	e_input,

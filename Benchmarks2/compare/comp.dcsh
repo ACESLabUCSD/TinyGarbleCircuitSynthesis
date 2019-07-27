@@ -1,0 +1,33 @@
+set search_path [list . ../../SynthesisLibrary/lib_EMP/dff_full/]
+set target_library ../../SynthesisLibrary/lib_EMP/dff_full/dff_full.db
+set link_library ../../SynthesisLibrary/lib_EMP/dff_full/dff_full.db
+set symbol_library [concat ../../SynthesisLibrary/lib_EMP/generic.sdb]
+set hdlin_while_loop_iterations 1024
+
+analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibrary/syn_lib/ADD.v ../../SynthesisLibrary/syn_lib/MULT.v ../../SynthesisLibrary/syn_lib/SUB.v ../../SynthesisLibrary/syn_lib/COMP.v ../../SynthesisLibrary/syn_lib/MUX.v}
+
+analyze -format sverilog comp_nbit_1cc.sv
+
+foreach n {8} {
+	elaborate comp_nbit_1cc -architecture verilog -library DEFAULT -update -parameters $n
+	set_max_area -ignore_tns 0 
+	set_flatten false -design *
+	set_structure false -design *
+	set_resource_allocation area_only
+	report_compile_options
+	compile -ungroup_all  -map_effort high -area_effort high -no_design_rule
+	write -hierarchy -format verilog -output syn/comp_${n}bit\_1cc_syn.v
+}
+
+analyze -format sverilog comp_nbit_ncc.sv
+
+elaborate comp_nbit_ncc -architecture verilog -library DEFAULT -update
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure false -design *
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all  -map_effort high -area_effort high -no_design_rule
+write -hierarchy -format verilog -output syn/comp_nbit\_ncc_syn.v
+
+exit
