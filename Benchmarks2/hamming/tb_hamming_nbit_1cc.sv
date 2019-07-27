@@ -11,7 +11,7 @@ module tb_hamming_nbit_1cc;
 	logic	[log2(N)-1:0] 	o;
 	logic	[log2(N)-1:0] 	o_ref;
 
-	hamming #(.N(N), .CC(CC)) uut(
+	hamming_nbit_1cc #(.N(N), .CC(CC)) uut(
 		.clk(clk), .rst(rst),
 		.g_input(g_input),
 	    .e_input(e_input),
