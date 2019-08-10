@@ -56,18 +56,20 @@ int WriteCircuit(const ReadCircuit& read_circuit, const string &file_name) {
 	num_wire includes the number of constant wires (2).
 	*/
 	
-	int num_gate, num_wire, n1, n1_0, n2, n2_0, n3;
+	int num_gate, num_wire, n0, n0_0, n1, n1_0, n2, n2_0, n3;
   
 	num_gate = read_circuit.dff_size + read_circuit.gate_size;
+	n0 = read_circuit.s_init_size + read_circuit.s_input_size;
+	n0_0 = read_circuit.s_init_size;
 	n1 = read_circuit.e_init_size + read_circuit.e_input_size;
 	n1_0 = read_circuit.e_init_size;
 	n2 = read_circuit.g_init_size + read_circuit.g_input_size;
 	n2_0 = read_circuit.g_init_size;
-	num_wire = num_gate + n1 + n2 + NUM_CONST;
+	num_wire = num_gate + n0 + n1 + n2 + NUM_CONST;
 	n3 = read_circuit.output_size;
 	
 	f << num_gate << " " << num_wire << endl;
-	f << n1 << " " << n1_0 << " " << n2 << " " << n2_0 << " " <<  n3 << endl << endl;
+	f << n0 << " " << n0_0 << " " << n1 << " " << n1_0 << " " << n2 << " " << n2_0 << " " <<  n3 << endl << endl;
 	
 	for (uint64_t i = 0; i < read_circuit.dff_size; i++) {
 		f << "2 1 ";
