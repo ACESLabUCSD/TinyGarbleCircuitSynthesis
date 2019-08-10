@@ -5,14 +5,14 @@ module tb_relu_nbit_1cc;
 	parameter N = 8;
  
 	logic	signed	[N-1:0]	s_input;
-	logic	signed	[N-1:0]	o, o_ref;
+	logic	signed	[N-2:0]	o, o_ref;
 
 	sum_nbit_1cc #(.N(N)) uut( 
 		.s_input(s_input),
 		.o(o)
 	);	
 
-	assign o_ref = (s_input > 0)? s_input : {N{1'b0}};
+	assign o_ref = (s_input > 0)? s_input : {(N-1){1'b0}};
 	
 	initial begin
 		s_input = 'd99;
