@@ -1,0 +1,44 @@
+set search_path [concat . ../../SynthesisLibrary/lib_EMP/dff_full/]
+set target_library ../../SynthesisLibrary/lib_EMP/dff_full/dff_full.db
+set link_library ../../SynthesisLibrary/lib_EMP/dff_full/dff_full.db
+set symbol_library ../../SynthesisLibrary/lib_EMP/generic.sdb
+
+analyze -format sverilog aes_ht_0.sv
+analyze -format sverilog aes_ht_1.sv
+analyze -format sverilog aes_ht_10.sv
+analyze -format sverilog AddRoundKey.sv
+analyze -format sverilog SubBytes.sv 
+analyze -format sverilog ShiftRows.sv 
+analyze -format sverilog MixColumns.sv 
+analyze -format sverilog KeyExpansion_ht.sv
+
+elaborate aes_ht_0 -architecture verilog -library DEFAULT -update
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure -design * false
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all -boundary_optimization  -map_effort high -area_effort high -no_design_rule
+write -hierarchy -format verilog -output syn/aes_ht_0_syn.v
+
+foreach COUNTER {1 2 3 4 5 6 7 8 9} {
+	elaborate aes_ht_1 -architecture verilog -library DEFAULT -update -parameters $COUNTER
+	set_max_area -ignore_tns 0 
+	set_flatten false -design *
+	set_structure -design * false
+	set_resource_allocation area_only
+	report_compile_options
+	compile -ungroup_all -boundary_optimization  -map_effort high -area_effort high -no_design_rule
+	write -hierarchy -format verilog -output syn/aes_ht_${COUNTER}_syn.v	
+}
+
+elaborate aes_ht_10 -architecture verilog -library DEFAULT -update
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure -design * false
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all -boundary_optimization  -map_effort high -area_effort high -no_design_rule
+write -hierarchy -format verilog -output syn/aes_ht_10_syn.v
+
+exit
