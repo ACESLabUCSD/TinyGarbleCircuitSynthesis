@@ -3,17 +3,26 @@ module KeyExpansion_ht #(parameter COUNTER = 0)(
 	output    [127:0]	nextKey
 );
 
-  parameter NR = 10;
-  parameter [7:0] RCon[0:NR]   = '{8'h01, 8'h02, 8'h04, 8'h08, 8'h10, 8'h20, 8'h40, 8'h80, 8'h1b, 8'h36, 8'h00};
-
-
   wire      [31:0]           w[3:0];
   wire      [31:0]           wNext[3:0];
 
   wire      [31:0]           t;
+  wire      [7:0]            RCon[0:10];  
   wire      [31:0]           rotWord;
   wire      [31:0]           Q;
   wire      [95:0]           unused;
+  
+  assign RCon[0] = 8'h01;
+  assign RCon[1] = 8'h02;
+  assign RCon[2] = 8'h04;
+  assign RCon[3] = 8'h08;
+  assign RCon[4] = 8'h10;
+  assign RCon[5] = 8'h20;
+  assign RCon[6] = 8'h40;
+  assign RCon[7] = 8'h80;
+  assign RCon[8] = 8'h1b;
+  assign RCon[9] = 8'h36;
+  assign RCon[10] = 8'h00;
 
   genvar i;
 
@@ -24,7 +33,6 @@ module KeyExpansion_ht #(parameter COUNTER = 0)(
   end
   endgenerate
 
-
   generate 
   for(i=0;i<4;i=i+1) begin:NR_W
     if(i==0) begin:FIRST
@@ -34,8 +42,6 @@ module KeyExpansion_ht #(parameter COUNTER = 0)(
     end
   end
   endgenerate
-
-
   
   assign rotWord = {w[3][7:0], w[3][31:8]};
   SubBytes a(.x({rotWord, 96'b0}), .z({Q, unused}));
