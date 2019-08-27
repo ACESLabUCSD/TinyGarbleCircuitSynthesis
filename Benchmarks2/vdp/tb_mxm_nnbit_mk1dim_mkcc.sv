@@ -9,7 +9,7 @@ module tb_mxm_nnbit_mk1dim_mkcc;
 	logic	signed	[N-1:0] 	e_input;
 	logic	signed	[2*N+K-2:0]	o;
 
-	mac_nnbit_1cc #(.N(N), .K(K)) uut( //N: input bit-width, K: vector dimension
+	mac_nnbit_kcc #(.N(N), .K(K)) uut( //N: input bit-width, K: vector dimension
 		.clk(clk), .rst(rst),
 		.g_input(g_input),
 		.e_input(e_input),
