@@ -2,14 +2,14 @@
 
 module tb_vdp_nnbit_kdim_kcc;
 
-	parameter N = 8, K = 3; 
+	parameter N = 8, K = 3, L = 2*(N-1)+K; 
 
-	logic						clk, rst;
-	logic	signed	[N-1:0] 	g_input;
-	logic	signed	[N-1:0] 	e_input;
-	logic	signed	[2*N+K-2:0]	o;
+	logic					clk, rst;
+	logic	signed	[N-1:0] g_input;
+	logic	signed	[N-1:0] e_input;
+	logic	signed	[L-1:0]	o;
 
-	mac_nnbit_1cc #(.N(N), .K(K)) uut( //N: input bit-width, K: vector dimension
+	mac_nnbit_kcc #(.N(N), .K(K)) uut( //N: input bit-width, K: vector dimension
 		.clk(clk), .rst(rst),
 		.g_input(g_input),
 		.e_input(e_input),
@@ -18,7 +18,7 @@ module tb_vdp_nnbit_kdim_kcc;
 
 	logic	signed	[N-1:0]	G	[0:K-1];
 	logic	signed	[N-1:0]	E	[0:K-1];
-	logic	signed	[2*N+K-2:0]	O_ref[0:K];
+	logic	signed	[L-1:0]	O_ref[0:K];
 	integer k, l;
 
 	always #50 clk = ~clk;

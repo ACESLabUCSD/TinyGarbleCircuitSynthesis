@@ -8,8 +8,8 @@ analyze -format verilog {../../SynthesisLibrary/syn_lib/ADD.v ../../SynthesisLib
 
 analyze -format sverilog mac_nnbit_kcc.sv
 
-foreach n {8 16 32} {
-foreach k {3 5 7} {
+foreach n {4 8 16 32} {
+foreach k {3 5 7 9} {
 elaborate mac_nnbit_kcc -architecture verilog -library DEFAULT -update -parameters $n,$k
 set_max_area -ignore_tns 0 
 set_flatten false -design *

@@ -2,7 +2,7 @@
 
 module tb_mxv_nnbit_jkdim_relu;
 
-	parameter N = 8, J = 3, K = 3, L = 2*N+K-1;
+	parameter N = 8, J = 3, K = 3, L = 2*(N-1)+K;
 	
 	logic	signed	[J*K*N-1:0] g_input;
 	logic	signed	[K*N-1:0] 	e_input;
@@ -10,7 +10,7 @@ module tb_mxv_nnbit_jkdim_relu;
 	
 	logic	signed	[N-1:0] W[J-1:0][K-1:0];
 	logic	signed	[N-1:0] X[K-1:0];
-	logic	signed	[L-2:0] R_WX[J-1:0];
+	logic	signed	[L-2:0] R_WX[J-1:0], R_WX_ref[J-1:0];
 	
 	integer j, k;
 	
@@ -18,10 +18,19 @@ module tb_mxv_nnbit_jkdim_relu;
 		for (j = 0; j < J; j = j+1)
 			for (k = 0; k < K; k = k + 1)
 				g_input[(j*K+k+1)*N-1 -: N] = W[j][k];
+				
 		for (k = 0; k < K; k = k + 1)
 			e_input[(k+1)*N-1 -: N] = X[k];
+			
 		for (j = 0; j < J; j = j+1)
 			R_WX[j] = o[(j+1)*(L-1)-1 -: (L-1)];
+			
+		for (j = 0; j < J; j = j+1) begin
+			R_WX_ref[j] = 0;
+			for (k = 0; k < K; k = k + 1)
+				R_WX_ref[j] = R_WX_ref[j] + W[j][k]*X[k];
+			if(R_WX_ref[j] < 0) R_WX_ref[j] = 0;
+		end
 	end
 	
 	mxv_nnbit_jkdim_relu #(.N(N), .J(J), .K(K)) uut( //N: input bit-width, (JxK)(Kx1) = (Jx1)

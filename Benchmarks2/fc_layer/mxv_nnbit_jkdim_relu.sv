@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module mxv_nnbit_jkdim_relu #(parameter N = 8, J = 3, K = 3, L = 2*N+K-1)( //N: input bit-width, (JxK)(Kx1) = (Jx1)
+module mxv_nnbit_jkdim_relu #(parameter N = 8, J = 3, K = 3, L = 2*(N-1)+K)( //N: input bit-width, (JxK)(Kx1) = (Jx1)
 	input			signed	[J*K*N-1:0] 	g_input,
 	input			signed	[K*N-1:0] 		e_input,
 	output	logic 	signed	[J*(L-1)-1:0]	o

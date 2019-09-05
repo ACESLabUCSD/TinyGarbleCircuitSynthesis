@@ -1,4 +1,4 @@
-vlog -reportprogress 300 -work work ../vdp/*mac_nnbit_1cc.sv
+vlog -reportprogress 300 -work work ../vdp/*mac_nnbit_*cc.sv
 vsim -gui work.tb_mac_nnbit_1cc -L TG_SynLib
 
 add wave  \
