@@ -1,6 +1,8 @@
+echo "Use -d to compile with Synopsys Design Compiler"
+
 mkdir -p syn
 
-if [ $1 ] && [ $1 = "-s" ]; then
+if [ $1 ] && [ $1 = "-d" ]; then
 	design_vision -no_gui -f mxv_nnbit_jkdim_relu.dcsh
 	rm *.pvl *.syn *.mr *.log *.svf
 else
