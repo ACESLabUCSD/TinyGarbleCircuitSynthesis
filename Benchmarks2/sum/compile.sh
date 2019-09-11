@@ -1,8 +1,16 @@
-#!/bin/bash
+echo "Use -d to compile with Synopsys Design Compiler"
+
 mkdir -p syn
 
-design_vision -no_gui -f sum.dcsh
-rm *.pvl *.syn *.mr *.log *.svf
+if [ $1 ] && [ $1 = "-d" ]; then
+	design_vision -no_gui -f sum.dcsh
+	rm *.pvl *.syn *.mr *.log *.svf
+else
+	yosys -c sum.tcl
+fi
 
-../../Verilog2EMP/bin/V2EMP_Main -i syn/sum_nbit_1cc_syn.v -o syn/sum_nbit_1cc_syn.emp --log2std
-../../Verilog2EMP/bin/V2EMP_Main -i syn/sum_nbit_ncc_syn.v -o syn/sum_nbit_ncc_syn.emp --log2std
+for verilogfile in syn/*.v
+do
+  empfile=${verilogfile%.*}.emp
+  ../../Verilog2EMP/bin/V2EMP_Main -i $verilogfile -o $empfile --log2std 
+done 
