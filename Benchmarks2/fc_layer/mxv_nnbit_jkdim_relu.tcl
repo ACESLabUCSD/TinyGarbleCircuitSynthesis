@@ -12,6 +12,6 @@ foreach N [list 4 8 16] {
 		opt; clean; opt;
 		opt_clean -purge
 		stat -liberty ../../SynthesisLibrary/lib_EMP/asic_cell_yosys_area.lib
-		write_verilog -noattr -noexpr syn/mxv_${N}_${N}_bit_${K}_${K}_dim_relu.v
+		write_verilog -noattr -noexpr -nohex syn/mxv_${N}_${N}_bit_${K}_${K}_dim_relu.v
 	}
 }
