@@ -8,7 +8,7 @@ analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibr
 
 analyze -format sverilog relu_nbit_1cc.sv
 
-foreach n {9 18 20 22 34 36 38 66 68 70} {
+foreach n {9 17 19 21 33 35 37 65 67 69} {
 	elaborate relu_nbit_1cc -architecture verilog -library DEFAULT -update -parameters $n
 	set_max_area -ignore_tns 0 
 	set_flatten false -design *

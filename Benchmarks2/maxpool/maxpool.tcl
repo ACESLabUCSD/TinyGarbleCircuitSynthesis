@@ -1,6 +1,6 @@
 yosys -import
 
-foreach N [list 9 17 19 21 33 35 37 65 67 69] {
+foreach N [list 9 16 18 20 32 34 36 64 66 68] {
 	read_verilog -overwrite -defer ../../SynthesisLibrary/syn_lib/*.v 
 	read_verilog -overwrite -defer -sv  maxpool_nbit_kdim_kcc.sv
 	hierarchy -check -top maxpool_nbit_kdim_kcc -chparam N $N 

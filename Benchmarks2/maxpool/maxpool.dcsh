@@ -8,7 +8,7 @@ analyze -format verilog {../../SynthesisLibrary/syn_lib/FA.v ../../SynthesisLibr
 
 analyze -format sverilog maxpool_nbit_kdim_kcc.sv
 
-foreach n {9 17 19 21 33 35 37 65 67 69} {
+foreach n {9 16 18 20 32 34 36 64 66 68} {
 	elaborate maxpool_nbit_kdim_kcc -architecture verilog -library DEFAULT -update -parameters $n
 	set_max_area -ignore_tns 0 
 	set_flatten false -design *
