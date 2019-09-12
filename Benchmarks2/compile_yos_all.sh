@@ -6,12 +6,12 @@ then
 	echo "skipping synthesis"
 	for d in *
 	do
-		( cp ${d%/*}/syn/*_yos.v syn_all)	
+		( cp ${d%/*}/syn/*.v syn_all)	
 	done
 else 
 	for d in *
 	do
-		( cd "$d" && ./compile_yos.sh  && cd ".." && cp ${d%/*}/syn/*_yos.v syn_all)	
+		( cd "$d" && ./compile.sh  && cd ".." && cp ${d%/*}/syn/*.v syn_all)	
 	done
 fi
 for verilogfile in syn_all/*.v

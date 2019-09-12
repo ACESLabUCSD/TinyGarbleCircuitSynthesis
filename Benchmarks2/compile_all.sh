@@ -11,7 +11,7 @@ then
 else 
 	for d in *
 	do
-		( cd "$d" && ./compile.sh && rm *.pvl *.syn *.mr *.log *.svf && cd ".." && cp ${d%/*}/syn/*.v syn_all)
+		( cd "$d" && ./compile.sh -d && rm *.pvl *.syn *.mr *.log *.svf && cd ".." && cp ${d%/*}/syn/*.v syn_all)
 	done
 fi
 #for verilogfile in syn_all/*.v
