@@ -21,3 +21,5 @@ do
 	../../tinygarble2/bin/readCircuitFile -i  $empfile &
 done
 wait
+
+cp syn_all/*.bin ../../tinygarble2/tinygarble/netlists_pi/ 

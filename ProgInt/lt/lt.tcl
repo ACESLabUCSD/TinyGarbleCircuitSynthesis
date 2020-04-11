@@ -1,6 +1,6 @@
 yosys -import
 
-foreach N [list 8 16 32 64] {
+foreach N [list 8 16 20 24 30 32 64] {
 	read_verilog -defer ../../SynthesisLibrary/syn_lib/*.v 
 	read_verilog -defer -sv  lt.sv
 	hierarchy -check -top lt -chparam N $N 

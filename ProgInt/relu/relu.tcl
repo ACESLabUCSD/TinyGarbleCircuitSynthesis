@@ -1,9 +1,9 @@
 yosys -import
 
-foreach N [list 5 8 16 20 24 30 32 64] {
+foreach N [list 28] {
 	read_verilog -overwrite -defer ../../SynthesisLibrary/syn_lib/*.v 
-	read_verilog -overwrite -defer -sv  ifelse.sv
-	hierarchy -check -top ifelse -chparam N $N 
+	read_verilog -overwrite -defer -sv  relu.sv
+	hierarchy -check -top relu -chparam N $N 
 	procs; opt; flatten; opt; 
 	techmap; opt;
 	dfflibmap -liberty ../../SynthesisLibrary/lib_EMP/asic_cell_yosys.lib
@@ -11,5 +11,5 @@ foreach N [list 5 8 16 20 24 30 32 64] {
 	opt; clean; opt;
 	opt_clean -purge
 	stat -liberty ../../SynthesisLibrary/lib_EMP/asic_cell_yosys_area.lib
-	write_verilog -noattr -noexpr -nohex syn/ifelse_${N}bit.v
+	write_verilog -noattr -noexpr -nohex syn/relu_${N}bit.v
 }
