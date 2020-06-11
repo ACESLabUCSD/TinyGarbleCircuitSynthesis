@@ -1,6 +1,6 @@
 yosys -import
 
-foreach N [list 5 8 16 20 24 30 32 64] {
+for {set N 1} {$N < 65} {incr N} {
 	read_verilog -overwrite -defer ../../SynthesisLibrary/syn_lib/*.v 
 	read_verilog -overwrite -defer -sv  ifelse.sv
 	hierarchy -check -top ifelse -chparam N $N 

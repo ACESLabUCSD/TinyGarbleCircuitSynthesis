@@ -1,7 +1,7 @@
 yosys -import
 
-foreach N [list 24 28] {
-	foreach M [list 15 14] {
+for {set N 2} {$N < 65} {incr N} {
+	for {set M 2} {$M < 65} {incr M} {
 		read_verilog -overwrite -defer ../../SynthesisLibrary/syn_lib/*.v 
 		read_verilog -overwrite -defer -sv  mult_n_2_2n.sv
 		hierarchy -check -top mult_n_2_2n -chparam N $N -chparam M $M 
