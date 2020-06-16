@@ -58,4 +58,23 @@ To be specific, we need to ensure two properties of the registers: (i) they are 
 In the case of MAC, the register is reset to 0 
 (it is also possible to reset the register to user defined values provided in `g_init` or `e_init`, we do not need them is this demo).
 
+TinyGarble expects the interface to the Verilog module in a specific format as described [here](/Verilog2SCD/README.md#circuit-format).
+To ensure that format, we add the following wrapper to the MAC module. 
 
+```SystemVerilog
+module mac_TG #(parameter N = 8, M = N, L = 64)( 
+	input			clk, rst,
+	input	signed	[N-1:0] g_input,
+	input	signed	[M-1:0] e_input,
+	output	signed	[L-1:0]	o   
+);
+
+	mac #(.N(N), .M(M), .L(L)) mac (
+		.clk(clk), .rst(rst),
+		.A(g_input),
+		.B(e_input),
+		.Y(o) 	
+	);
+
+endmodule
+```
