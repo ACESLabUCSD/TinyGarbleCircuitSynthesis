@@ -125,9 +125,18 @@ rm *.pvl *.syn *.mr *.log *.svf # remove intermediate files
 The synthesis outputs are written in the `syn` directory. 
 You can count the number of gates in the generated netlist with the [count.sh](/SynthesisLibrary/script/count.sh) script.
 For example,
-```
+```bash
 ../../SynthesisLibrary/script/count.sh syn/mac_8_8_32bit.v
 ```
+
+To execute to TinyGarble, the generated netlist needs to be converted to the [SCD](/Verilog2SCD) format using `V2SCD_Main`.
+For example to convert `syn/mac_8_8_32bit.v` to SCD, run
+
+```bash
+../../Verilog2SCD/bin/V2SCD_Main -i syn/mac_8_8_32bit.v  -o syn/mac_8_8_32bit.scd --log2std
+
+```
+Again, please make sure the relative location of the `V2SCD_Main` binary is correct. 
 
 
 
