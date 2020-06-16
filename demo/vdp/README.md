@@ -1,9 +1,9 @@
 ## Vector Dot Product (VDP)
 
-In this demo, we will show how to compute the dot product of two `N` element vectors `A` from Alice and `B` from Bob through the TinyGarble framework.
+In this demo, we will show how to compute the dot product of two `K` element vectors `A` from Alice and `B` from Bob through the TinyGarble framework.
 The VDP `Y` of `A` and `B` is computed through a sequence of Multiply-Accumulate (MAC) operations as shown by the following equation
 
-![Y = \sum_{i=0}^{N-1}A_iB_i](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Csum_%7Bi%3D0%7D%5E%7BN-1%7DA_iB_i)
+![Y = \sum_{i=0}^{K-1}A_iB_i](https://render.githubusercontent.com/render/math?math=Y%20%3D%20%5Csum_%7Bi%3D0%7D%5E%7BK-1%7DA_iB_i)
 
 We will follow the steps presented in the [start page](/README.md) to compute this equation. 
 
@@ -137,6 +137,29 @@ For example to convert `syn/mac_8_8_32bit.v` to SCD, run
 
 ```
 Again, please make sure the relative location of the `V2SCD_Main` binary is correct. 
+
+We are now ready to compute VDP through GC. 
+Please change the directory to where the TinyGarble repo is located. 
+First, please have a look at the usage of the [`TinyGarble`](https://github.com/esonghori/TinyGarble#main-binary) binary. 
+Let us compute the dot product of 3-element vectors `A = {1, 2, 3}` and `B = {-1, -2, -3}` where each element is represented by 8-bit signed numbers and the accumulator is 32 bits.
+For this we have to use the netlist `syn/mac_8_8_32bit.scd` and execute TinyGarble for 3 cycles. 
+
+On Alice's terminal, run
+```bash
+./bin/garbled_circuit/TinyGarble -a -i ../../TinyGarbleCircuitSynthesis/demo/vdp/syn/mac_8_8_32bit.scd --input   030102 -c 3 --output_mode 2 --log2std 
+```
+On Bob's terminal, run
+```bash
+./bin/garbled_circuit/TinyGarble -b -i ../../TinyGarbleCircuitSynthesis/demo/vdp/syn/mac_8_8_32bit.scd --input  010201 -c 3 --output_mode 2 --log2std
+```
+Please note that both the inputs and outputs are in hex format. 
+Also make sure that the location of the input SCD file (specified with `-i`) is correct.
+
+
+
+
+
+
 
 
 
