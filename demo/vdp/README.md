@@ -47,17 +47,17 @@ module mac #(parameter N = 8, M = N, L = 64)(
 endmodule
 ```
 
-To compute the MAC we use the `MULT_` and `ADD_` modules from the synthesis libraray. 
-Each arithmetic operation has two modules in the libraray - one for unsigned and one for signed opereations. 
-The module names for signed operations has the suffix `_`. 
-In this demo we compute VDP of signed numbers. This is why all the variables are also declared as `signed`.
+To compute the MAC we use the `MULT_` and `ADD_` modules from the synthesis library. 
+Each arithmetic operation has two modules in the library - one for unsigned and one for signed operations. 
+The module names for signed operations have the suffix `_`. 
+In this demo, we compute the VDP of signed numbers. This is why all the variables are also declared as `signed`.
 
 The products or `A` and `B` are accumulated in the register `Y_reg`. 
-Please ovserve how the register is updated. 
+Please observe how the register is updated. 
 TinyGarble requires all the registers to be updated in this fashion. 
 To be specific, we need to ensure two properties of the registers: (i) they are updated asynchronously (`always@(posedge clk or posedge rst)`) and (ii) their input both at reset and in regular clock cycles must be provided. 
 In the case of MAC, the register is reset to 0 
-(it is also possible to reset the register to user defined values provided in `g_init` or `e_init`, we do not need them is this demo).
+(it is also possible to reset the register to user-defined values provided in `g_init` or `e_init`, we do not need them is this demo).
 
 
 ### Step 2: Write a wrapper according to the template expected by Verilog2SCD
@@ -86,7 +86,7 @@ endmodule
 ### Step 3: Synthesize the Verilog module
 
 The next step is to compile this module with a circuit synthesis tool using the synthesis library of TinyGarble.
-Currently the synthesis library sypports Synopsys DC and Yosys. 
+Currently, the synthesis library supports Synopsys DC and Yosys. 
 
 #### Synthesis with Synopsys DC
 
@@ -119,9 +119,9 @@ write -hierarchy -format verilog -output syn/mac_${N}_${N}_${L}bit.v
 exit
 ```
 
-Fisrt, make sure the the relative path (in this case `../../SynthesisLibrary`) of the [SynthesisLibrary](/SynthesisLibrary) is correct.
-Then read the input Verilog module with the `analyze` command (in this demo, `analyze -format sverilog mac.sv`, it has the format specifier since the input module is in SyetemVerilog while the default is Verilog).
-We can synthesize the same module for different bit widths by passing the parameters during execution of the `elaborate` command. 
+First, make sure the relative path (in this case `../../SynthesisLibrary`) of the [SynthesisLibrary](/SynthesisLibrary) is correct.
+Then read the input Verilog module with the `analyze` command (in this demo, `analyze -format sverilog mac.sv`, it has the format specifier since the input module is in SystemVerilog while the default is Verilog).
+We can synthesize the same module for different bit widths by passing the parameters during the execution of the `elaborate` command. 
 In this demo, the module has three parameters and we set their values with `-parameters $N,$N,$L`.
 
 To execute mac.dcsh through Synopsys DC, run
@@ -154,9 +154,9 @@ foreach N [list 4 8 16]  {
 }
 ```
 
-Similart to Synopsys, make sure the the relative path (in this case `../../SynthesisLibrary`) of the [SynthesisLibrary](/SynthesisLibrary) is correct.
-In Yosys, the input Verilog module is read with the `read_verilog` command (in this demo, `read_verilog -overwrite -defer -sv  mac.sv`, it also has the format specifier since the input module is in SyetemVerilog while the default is Verilog).
-We can synthesize the same module for different bit widths by passing the parameters during execution of the `hierarchy` command. 
+Similar to Synopsys, make sure the relative path (in this case `../../SynthesisLibrary`) of the [SynthesisLibrary](/SynthesisLibrary) is correct.
+In Yosys, the input Verilog module is read with the `read_verilog` command (in this demo, `read_verilog -overwrite -defer -sv  mac.sv`, it also has the format specifier since the input module is in SystemVerilog while the default is Verilog).
+We can synthesize the same module for different bit widths by passing the parameters during the execution of the `hierarchy` command. 
 In this demo, the module has three parameters and we set their values with `-chparam N $N -chparam L $L` (`M` is set to `N` by default in the Verilog module).
 
 To execute mac.tcl through Yosys, run
@@ -191,7 +191,7 @@ We are now ready to compute VDP through GC.
 Please change the directory to where the TinyGarble repo is located. 
 First, please have a look at the usage of the [`TinyGarble`](https://github.com/esonghori/TinyGarble#main-binary) binary. 
 Let us compute the dot product of 3-element vectors `A = {1, 2, 3}` and `B = {-1, -2, -3}` where each element is represented by 8-bit signed numbers and the accumulator is 32 bits.
-For this we have to use the netlist `syn/mac_8_8_32bit.scd` and execute TinyGarble for 3 cycles. 
+For this, we have to use the netlist `syn/mac_8_8_32bit.scd` and execute TinyGarble for 3 cycles. 
 
 On Alice's terminal, run
 ```bash
