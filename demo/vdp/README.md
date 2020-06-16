@@ -9,7 +9,9 @@ We will follow the steps presented in the [start page](/README.md) to compute th
 
 #### Before continuing to the remaining parts of the demo, please make sure you have set up [TinyGarble](https://github.com/esonghori/TinyGarble), [Verilog2SCD](/Verilog2SCD) and either of [Synopsys Design Compiler](https://www.synopsys.com/implementation-and-signoff/rtl-synthesis-test/design-compiler-graphical.html) or [Yosys Open SYnthesis Suite](http://www.clifford.at/yosys/). 
 
-First we write the Verilog code for the MAC operation using the modules for arithmetic and logical operations presented in the [Synthesis Library](/SynthesisLibrary/syn_lib). The Verilog code is given in [mac.sv](/demo/vdp/mac.sv). Let us have a look at different parts of the code. 
+### Step 1: Write a Verilog module
+
+First, we write the Verilog code for the MAC operation using the modules for arithmetic and logical operations presented in the [Synthesis Library](/SynthesisLibrary/syn_lib). The Verilog code is given in [mac.sv](/demo/vdp/mac.sv). Let us have a look at different parts of the code. 
 
 ```SystemVerilog
 module mac #(parameter N = 8, M = N, L = 64)( 
@@ -57,6 +59,9 @@ To be specific, we need to ensure two properties of the registers: (i) they are 
 In the case of MAC, the register is reset to 0 
 (it is also possible to reset the register to user defined values provided in `g_init` or `e_init`, we do not need them is this demo).
 
+
+### Step 2: Write a wrapper according to the template expected by Verilog2SCD
+
 TinyGarble expects the interface to the Verilog module in a specific format as described [here](/Verilog2SCD/README.md#circuit-format).
 To ensure that format, we add the following wrapper to the MAC module. 
 
@@ -78,8 +83,14 @@ module mac_TG #(parameter N = 8, M = N, L = 64)(
 endmodule
 ```
 
+### Step 3: Synthesize the Verilog module
+
 The next step is to compile this module with a circuit synthesis tool using the synthesis library of TinyGarble.
-Currently the synthesis library sypports Synopsys DC and Yosys. The commands to synthesize the module with Synopsys DC is provided in [mac.dcsh](/demo/vdp/mac.dcsh). Let us have a look at the command. 
+Currently the synthesis library sypports Synopsys DC and Yosys. 
+
+#### Synthesis with Synopsys DC
+
+The commands to synthesize the module with Synopsys DC is provided in [mac.dcsh](/demo/vdp/mac.dcsh). Let us have a look at the command. 
 
 ```bash
 set search_path [list . ../../SynthesisLibrary/lib/dff_full/]
@@ -119,6 +130,8 @@ mkdir -p syn # synthesis outputs are written here. see 'write' command at the en
 design_vision -no_gui -f mac.dcsh
 rm *.pvl *.syn *.mr *.log *.svf # remove intermediate files
 ```
+
+#### Synthesis with Yosys
 
 The commands to synthesize the module with Synopsys DC is provided in [mac.tcl](/demo/vdp/mac.tcl).  
 
@@ -160,6 +173,8 @@ For example,
 ```
 If you have both Synopsys DC and Yosys, you can synthesize the same Verilog module with both tools and compare their performances. 
 
+### Step 4: Translate the netlist file to SCD format
+
 Before executing TinyGarble, the generated netlist needs to be converted to the [SCD](/Verilog2SCD) format using `V2SCD_Main`.
 For example to convert `syn/mac_8_8_32bit.v` to SCD, run
 
@@ -167,8 +182,10 @@ For example to convert `syn/mac_8_8_32bit.v` to SCD, run
 ../../Verilog2SCD/bin/V2SCD_Main -i syn/mac_8_8_32bit.v  -o syn/mac_8_8_32bit.scd --log2std
 ```
 Again, please make sure the relative location of the `V2SCD_Main` binary is correct. 
-All the bash commands are written in [compile.sh](/demo/vdp/compile.sh).
-You can simply run `./compile.sh` to perform these operations all at once. 
+All the bash commands are written in [compile.sh](/demo/vdp/compile.sh) and [compile_y.sh](/demo/vdp/compile_y.sh).
+You can simply run `./compile.sh` for Synopysy or `./compile_y.sh` for Yosys to perform these operations all at once. 
+
+### Step 4: Execute TinyGarble
 
 We are now ready to compute VDP through GC. 
 Please change the directory to where the TinyGarble repo is located. 
