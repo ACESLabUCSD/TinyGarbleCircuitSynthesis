@@ -7,7 +7,7 @@ The VDP `Y` of `A` and `B` is computed through a sequence of Multiply-Accumulate
 
 We will follow the steps presented in the [start page](/README.md) to compute this equation. 
 
-#### Before continuing to the remaining parts of the demo, please make sure you have set up the [TinyGarble](https://github.com/esonghori/TinyGarble) repo as well as [Verilog2SCD](/Verilog2SCD) in this repo by following the directions provided in the respective repos. 
+#### Before continuing to the remaining parts of the demo, please make sure you have set up [TinyGarble](https://github.com/esonghori/TinyGarble), [Verilog2SCD](/Verilog2SCD) and either of [Synopsys Design Compiler](https://www.synopsys.com/implementation-and-signoff/rtl-synthesis-test/design-compiler-graphical.html) or [Yosys Open SYnthesis Suite](http://www.clifford.at/yosys/). 
 
 First we write the Verilog code for the MAC operation using the modules for arithmetic and logical operations presented in the [Synthesis Library](/SynthesisLibrary/syn_lib). The Verilog code is given in [mac.sv](/demo/vdp/mac.sv). Let us have a look at different parts of the code. 
 
@@ -79,7 +79,7 @@ endmodule
 ```
 
 The next step is to compile this module with a circuit synthesis tool using the synthesis library of TinyGarble.
-Currently the synthesis library sypports Synopsys Design Compiler (DC) and Yosys. The commands to synthesize the module with Synopsys DC is provided in [mac.dcsh](/demo/vdp/mac.dcsh). Let us have a look at the command. 
+Currently the synthesis library sypports Synopsys DC and Yosys. The commands to synthesize the module with Synopsys DC is provided in [mac.dcsh](/demo/vdp/mac.dcsh). Let us have a look at the command. 
 
 ```bash
 set search_path [list . ../../SynthesisLibrary/lib/dff_full/]
@@ -120,19 +120,51 @@ design_vision -no_gui -f mac.dcsh
 rm *.pvl *.syn *.mr *.log *.svf # remove intermediate files
 ```
 
+The commands to synthesize the module with Synopsys DC is provided in [mac.tcl](/demo/vdp/mac.tcl).  
+
+```tcl
+yosys -import
+
+foreach N [list 4 8 16]  {
+	foreach L [list 32]  {
+		read_verilog -overwrite -defer ../../SynthesisLibrary/syn_lib/*.v 
+		read_verilog -overwrite -defer -sv  mac.sv 
+		hierarchy -check -top mac_TG -chparam N $N -chparam L $L
+		procs; opt; flatten; opt; 
+		techmap; opt;
+		dfflibmap -liberty ../../SynthesisLibrary/lib/asic_cell_yosys.lib
+		abc -liberty ../../SynthesisLibrary/lib/asic_cell_yosys.lib -script ../../SynthesisLibrary/lib/script.abc; 
+		opt; clean; opt;
+		opt_clean -purge
+		write_verilog -noattr -noexpr -nohex syn/mac_${N}_${N}_${L}bit.v
+	}
+}
+```
+
+Similart to Synopsys, make sure the the relative path (in this case `../../SynthesisLibrary`) of the [SynthesisLibrary](/SynthesisLibrary) is correct.
+In Yosys, the input Verilog module is read with the `read_verilog` command (in this demo, `read_verilog -overwrite -defer -sv  mac.sv`, it also has the format specifier since the input module is in SyetemVerilog while the default is Verilog).
+We can synthesize the same module for different bit widths by passing the parameters during execution of the `hierarchy` command. 
+In this demo, the module has three parameters and we set their values with `-chparam N $N -chparam L $L` (`M` is set to `N` by default in the Verilog module).
+
+To execute mac.tcl through Yosys, run
+```bash
+mkdir -p syn
+yosys -c mac.tcl
+```
+
 The synthesis outputs are written in the `syn` directory. 
 You can count the number of gates in the generated netlist with the [count.sh](/SynthesisLibrary/script/count.sh) script.
 For example,
 ```bash
 ../../SynthesisLibrary/script/count.sh syn/mac_8_8_32bit.v
 ```
+If you have both Synopsys DC and Yosys, you can synthesize the same Verilog module with both tools and compare their performances. 
 
-To execute to TinyGarble, the generated netlist needs to be converted to the [SCD](/Verilog2SCD) format using `V2SCD_Main`.
+Before executing TinyGarble, the generated netlist needs to be converted to the [SCD](/Verilog2SCD) format using `V2SCD_Main`.
 For example to convert `syn/mac_8_8_32bit.v` to SCD, run
 
 ```bash
 ../../Verilog2SCD/bin/V2SCD_Main -i syn/mac_8_8_32bit.v  -o syn/mac_8_8_32bit.scd --log2std
-
 ```
 Again, please make sure the relative location of the `V2SCD_Main` binary is correct. 
 All the bash commands are written in [compile.sh](/demo/vdp/compile.sh).
@@ -146,11 +178,11 @@ For this we have to use the netlist `syn/mac_8_8_32bit.scd` and execute TinyGarb
 
 On Alice's terminal, run
 ```bash
-./bin/garbled_circuit/TinyGarble -a -i ../../TinyGarbleCircuitSynthesis/demo/vdp/syn/mac_8_8_32bit.scd --input   030102 -c 3 --output_mode 2 --log2std 
+./bin/garbled_circuit/TinyGarble -a -i ../../TinyGarbleCircuitSynthesis/demo/vdp/syn/mac_8_8_32bit.scd --input 010203 -c 3 --output_mode 2 --log2std 
 ```
 On Bob's terminal, run
 ```bash
-./bin/garbled_circuit/TinyGarble -b -i ../../TinyGarbleCircuitSynthesis/demo/vdp/syn/mac_8_8_32bit.scd --input  010201 -c 3 --output_mode 2 --log2std
+./bin/garbled_circuit/TinyGarble -b -i ../../TinyGarbleCircuitSynthesis/demo/vdp/syn/mac_8_8_32bit.scd --input FFFEFD -c 3 --output_mode 2 --log2std
 ```
 Please note that both the inputs and outputs are in hex format. 
 Also make sure that the location of the input SCD file (specified with `-i`) is correct.
