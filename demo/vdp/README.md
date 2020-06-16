@@ -9,8 +9,7 @@ We will follow the steps presented in the [start page](/README.md) to compute th
 
 #### Before continuing to the remaining parts of the demo, please make sure you have set up the [TinyGarble](https://github.com/esonghori/TinyGarble) repo as well as [Verilog2SCD](/Verilog2SCD) in this repo by following the directions provided in the respective repos. 
 
-First we write the Verilog code for the MAC operation using the modules for arithmetic and logical operations presented in the [Synthesis Library](/SynthesisLibrary/syn_lib). The Verilog code is given in [mac.sv](/demo
-/vdp/mac.sv). Let us have a look at different parts of the code. 
+First we write the Verilog code for the MAC operation using the modules for arithmetic and logical operations presented in the [Synthesis Library](/SynthesisLibrary/syn_lib). The Verilog code is given in [mac.sv](/demo/vdp/mac.sv). Let us have a look at different parts of the code. 
 
 ```SystemVerilog
 module mac #(parameter N = 8, M = N, L = 64)( 
@@ -80,8 +79,7 @@ endmodule
 ```
 
 The next step is to compile this module with a circuit synthesis tool using the synthesis library of TinyGarble.
-Currently the synthesis library sypports Synopsys Design Compiler (DC) and Yosys. The commands to synthesize the module with Synopsys DC is provided in [mac.dcsh](/demo
-/vdp/mac.dcsh). Let us have a look at the command. 
+Currently the synthesis library sypports Synopsys Design Compiler (DC) and Yosys. The commands to synthesize the module with Synopsys DC is provided in [mac.dcsh](/demo/vdp/mac.dcsh). Let us have a look at the command. 
 
 ```bash
 set search_path [list . ../../SynthesisLibrary/lib/dff_full/]
@@ -137,6 +135,8 @@ For example to convert `syn/mac_8_8_32bit.v` to SCD, run
 
 ```
 Again, please make sure the relative location of the `V2SCD_Main` binary is correct. 
+All the bash commands are written in [compile.sh](/demo/vdp/compile.sh).
+You can simply run `./compile.sh` to perform these operations all at once. 
 
 We are now ready to compute VDP through GC. 
 Please change the directory to where the TinyGarble repo is located. 
