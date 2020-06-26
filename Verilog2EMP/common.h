@@ -36,8 +36,7 @@ using std::endl;
 #define DKC2
 
 #define CONST_ZERO ((int64_t)-2)
-#define CONST_ONE  ((int64_t)-1)
-#define NUM_CONST 2
+#define CONST_ONE  ((int64_t)-3)
 
 #define ANDGATE 8
 #define ANDNGATE 4

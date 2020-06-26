@@ -353,20 +353,16 @@ int ParseNetlist(const string &filename,
           read_circuit_string->g_init_size = (no_of_bits>0)?no_of_bits:1;
         } else if(!str.compare("e_init")) {
           read_circuit_string->e_init_size = (no_of_bits>0)?no_of_bits:1;
-        } else if(!str.compare("s_init")) {
-          read_circuit_string->s_init_size = (no_of_bits>0)?no_of_bits:1;
         } else if(!str.compare("p_input")) {
           read_circuit_string->p_input_size = (no_of_bits>0)?no_of_bits:1;
         } else if(!str.compare("g_input")) {
           read_circuit_string->g_input_size = (no_of_bits>0)?no_of_bits:1;
         } else if(!str.compare("e_input")) {
           read_circuit_string->e_input_size = (no_of_bits>0)?no_of_bits:1;
-        }else if(!str.compare("s_input")) {
-          read_circuit_string->s_input_size = (no_of_bits>0)?no_of_bits:1;
         } else {
           LOG(ERROR) << "The input name is not valid " << str << endl <<
-          "valid choice: { p_init, g_init, e_init, s_init, "
-          "p_input, g_input, e_input, s_input}: " << line << endl;
+          "valid choice: { p_init, g_init, e_init, "
+          "p_input, g_input, e_input}: " << line << endl;
           return FAILURE;
         }
       }
@@ -505,11 +501,9 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
   read_circuit->p_init_size = read_circuit_string.p_init_size;
   read_circuit->g_init_size = read_circuit_string.g_init_size;
   read_circuit->e_init_size = read_circuit_string.e_init_size;
-  read_circuit->s_init_size = read_circuit_string.s_init_size;
   read_circuit->p_input_size = read_circuit_string.p_input_size;
   read_circuit->g_input_size = read_circuit_string.g_input_size;
   read_circuit->e_input_size = read_circuit_string.e_input_size;
-  read_circuit->s_input_size = read_circuit_string.s_input_size;
 
   read_circuit->dff_size = read_circuit_string.dff_list_string.size();
   read_circuit->gate_size = read_circuit_string.gate_list_string.size();
@@ -520,19 +514,15 @@ int IdAssignment(const ReadCircuitString& read_circuit_string,
 
   AddWireArray(wire_name_table, "p_init", read_circuit->p_init_size,
                &wire_index);
-  AddWireArray(wire_name_table, "p_input", read_circuit->p_input_size,
-               &wire_index);
-  AddWireArray(wire_name_table, "s_init", read_circuit->s_init_size,
-               &wire_index);
-  AddWireArray(wire_name_table, "s_input", read_circuit->s_input_size,
+  AddWireArray(wire_name_table, "g_init", read_circuit->g_init_size,
                &wire_index);
   AddWireArray(wire_name_table, "e_init", read_circuit->e_init_size,
                &wire_index);
-  AddWireArray(wire_name_table, "e_input", read_circuit->e_input_size,
-               &wire_index);
-  AddWireArray(wire_name_table, "g_init", read_circuit->g_init_size,
+  AddWireArray(wire_name_table, "p_input", read_circuit->p_input_size,
                &wire_index);
   AddWireArray(wire_name_table, "g_input", read_circuit->g_input_size,
+               &wire_index);
+  AddWireArray(wire_name_table, "e_input", read_circuit->e_input_size,
                &wire_index);
 
   for (uint64_t i = 0; i < read_circuit->dff_size; i++) {
