@@ -185,7 +185,7 @@ Again, please make sure the relative location of the `V2SCD_Main` binary is corr
 All the bash commands are written in [compile.sh](/demo/vdp/compile.sh) and [compile_y.sh](/demo/vdp/compile_y.sh).
 You can simply run `./compile.sh` for Synopysy or `./compile_y.sh` for Yosys to perform these operations all at once. 
 
-### Step 4: Execute TinyGarble
+### Step 5: Execute TinyGarble
 
 We are now ready to compute VDP through GC. 
 Please change the directory to where the TinyGarble repo is located. 
